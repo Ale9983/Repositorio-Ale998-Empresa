@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Solicitar información — TrackFlow</title>
+<meta name="description" content="Formulario de solicitud para marcas de e-commerce que quieren externalizar su logística con TrackFlow en Estados Unidos y España.">
+<meta name="theme-color" content="#F4F3EE">
+<meta name="robots" content="noindex, follow">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Tailwind CSS v4 (build de navegador) -->
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<style type="text/tailwindcss">
+  @theme {
+    --color-papel:  #F4F3EE;   /* fondo base */
+    --color-nieve:  #FFFFFF;   /* tarjetas */
+    --color-tinta:  #14141A;   /* texto y bandas oscuras */
+    --color-humo:   #DDDBD3;   /* bordes suaves */
+    --color-gris:   #5B5B62;   /* texto secundario */
+    --color-senal:  #DD0000;   /* rojo bandera */
+    --color-oro:    #FFCE00;   /* amarillo bandera */
+    --color-alerta: #C40000;   /* errores sobre fondo claro */
+
+    --font-display: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
+    --font-sans:    "IBM Plex Sans", system-ui, sans-serif;
+    --font-mono:    "IBM Plex Mono", ui-monospace, monospace;
+  }
+</style>
+
+<style>
+  body { background: #F4F3EE; color: #14141A; -webkit-font-smoothing: antialiased; }
+  html { scroll-behavior: smooth; }
+
+  a:focus-visible, button:focus-visible, input:focus-visible,
+  select:focus-visible, textarea:focus-visible {
+    outline: 3px solid #DD0000;
+    outline-offset: 3px;
+  }
+
+  .titular { letter-spacing: -0.01em; line-height: 0.9; }
+
+  /* Los fieldset traen un min-width intrínseco que rompe los grids dentro */
+  fieldset { min-width: 0; }
+  legend { display: block; width: 100%; }
+
+  .btn-idioma { color: #5B5B62; }
+  .btn-idioma:hover { color: #14141A; }
+  .btn-idioma[aria-pressed="true"] { background: #FFCE00; color: #0B0B0C; }
+
+  /* Estado de error en cualquier control */
+  [aria-invalid="true"] { border-color: #C40000 !important; }
+  .error:empty { display: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+  }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "TrackFlow",
+  "description": "Gestión de almacenes y entregas de última milla para e-commerce",
+  "url": "https://trackflow.com",
+  "foundingDate": "2009",
+  "address": [
+    {
+      "@type": "PostalAddress",
+      "addressCountry": "US",
+      "addressLocality": "Los Ángeles",
+      "addressRegion": "California"
+    },
+    {
+      "@type": "PostalAddress",
+      "addressCountry": "ES",
+      "addressLocality": "Zaragoza",
+      "addressRegion": "Aragón"
+    }
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+1-213-555-0147",
+    "contactType": "sales",
+    "availableLanguage": ["Spanish", "English"]
+  },
+  "sameAs": ["https://linkedin.com/company/trackflow"],
+  "areaServed": [
+    {
+      "@type": "Country",
+      "name": "Estados Unidos"
+    },
+    {
+      "@type": "Country",
+      "name": "Spain"
+    }
+  ]
+}
+</script>
+</head>
+
+<body class="bg-papel font-sans text-tinta antialiased">
+
+<a href="#contenido" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:left-4 focus:top-4 focus:bg-oro focus:px-4 focus:py-2 focus:font-mono focus:text-sm focus:text-tinta">Saltar al contenido</a>
+
+<!-- ============ CABECERA ============ -->
+<header class="sticky top-0 z-40 border-b border-humo bg-papel/90 backdrop-blur">
+  <div class="mx-auto flex max-w-5xl items-center justify-between gap-4 px-5 py-3 md:px-8">
+
+    <a href="index.html" class="flex items-center gap-3" aria-label="TrackFlow, volver a la página principal">
+      <span class="flex h-10 w-10 items-center justify-center bg-oro">
+        <svg viewBox="0 0 40 28" class="h-6 w-6" role="img" aria-label="Icono de camión de TrackFlow">
+          <title>Icono de camión de TrackFlow</title>
+          <rect x="1" y="4" width="21" height="14" rx="2" fill="#0B0B0C"/>
+          <path d="M24 8h6l5 6h3v4H24z" fill="#0B0B0C"/>
+          <circle cx="9" cy="21" r="4" fill="#0B0B0C"/>
+          <circle cx="30" cy="21" r="4" fill="#0B0B0C"/>
+          <rect x="1" y="11" width="21" height="3" fill="#DD0000"/>
+        </svg>
+      </span>
+      <span class="font-display text-3xl font-extrabold uppercase leading-none tracking-tight">
+        Track<span class="text-senal">Flow</span>
+      </span>
+    </a>
+
+    <div class="flex items-center gap-3">
+      <div class="flex items-center border border-humo" role="group" aria-label="Idioma / Language">
+        <button type="button" data-idioma="es" lang="es" aria-pressed="true"
+                class="btn-idioma px-3 py-2 font-mono text-xs uppercase tracking-[0.14em] transition-colors">ES</button>
+        <button type="button" data-idioma="en" lang="en" aria-pressed="false"
+                class="btn-idioma px-3 py-2 font-mono text-xs uppercase tracking-[0.14em] transition-colors">EN</button>
+      </div>
+
+      <a href="index.html" class="border border-humo px-4 py-2 font-mono text-xs uppercase tracking-[0.14em] text-tinta transition-colors hover:border-senal hover:text-senal">Volver</a>
+    </div>
+  </div>
+</header>
+
+<main id="contenido" class="mx-auto max-w-5xl px-5 py-12 md:px-8 md:py-20">
+
+  <!-- ============ INTRO ============ -->
+  <div class="border-b-4 border-oro pb-8">
+    <p class="mb-5 font-mono text-xs uppercase tracking-[0.2em] text-gris">
+      <span class="bg-senal px-2 py-1 text-papel">Formulario de solicitud</span>
+    </p>
+    <h1 class="titular font-display text-[clamp(2.5rem,8vw,5.5rem)] font-black uppercase">
+      Cuéntanos cómo<br><span class="text-senal">mueves tus pedidos</span>
+    </h1>
+    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-tinta/80">
+      Rellena estos datos y el equipo comercial preparará una propuesta de operación para tu marca. Se tarda unos dos minutos.
+    </p>
+    <p class="mt-4 font-mono text-xs uppercase tracking-[0.16em] text-gris">
+      Los campos marcados con <span class="text-senal">*</span> son obligatorios
+    </p>
+  </div>
+
+  <!-- ============ RESUMEN DE ERRORES ============ -->
+  <div id="resumen-errores" hidden tabindex="-1"
+       class="mt-10 border-l-4 border-alerta bg-nieve p-6" role="alert" aria-labelledby="titulo-resumen">
+    <h2 id="titulo-resumen" class="font-display text-2xl font-extrabold uppercase text-alerta">Revisa estos campos</h2>
+    <ul id="lista-errores" class="mt-4 space-y-2 text-sm text-tinta/85"></ul>
+  </div>
+
+  <!-- ============ FORMULARIO ============ -->
+  <form id="formulario" novalidate class="mt-12">
+
+    <!-- ---- Bloque 1: empresa ---- -->
+    <fieldset class="w-full min-w-0 border-t border-humo pt-8">
+      <legend class="mb-6 block w-full font-display text-3xl font-extrabold uppercase leading-none">
+        Tu empresa
+      </legend>
+
+      <div class="grid gap-6 sm:grid-cols-2">
+
+        <div>
+          <label for="empresa" class="mb-2 block font-mono text-xs uppercase tracking-[0.14em] text-gris">
+            Nombre de la empresa <span class="text-senal" aria-hidden="true">*</span>
+          </label>
+          <input id="empresa" name="empresa" type="text" required minlength="2" autocomplete="organization"
+                 aria-describedby="error-empresa"
+                 class="w-full border border-humo bg-nieve px-4 py-3 text-tinta transition-colors focus:border-senal">
+          <p id="error-empresa" class="error mt-2 font-mono text-xs text-alerta"></p>
+        </div>
+
+        <div>
+          <label for="contacto" class="mb-2 block font-mono text-xs uppercase tracking-[0.14em] text-gris">
+            Persona de contacto <span class="text-senal" aria-hidden="true">*</span>
+          </label>
+          <input id="contacto" name="contacto" type="text" required autocomplete="name"
+                 aria-describedby="ayuda-contacto error-contacto"
+                 class="w-full border border-humo bg-nieve px-4 py-3 text-tinta transition-colors focus:border-senal">
+          <p id="ayuda-contacto" class="mt-2 font-mono text-xs text-gris">Nombre y apellido</p>
+          <p id="error-contacto" class="error mt-2 font-mono text-xs text-alerta"></p>
+        </div>
+
+        <div>
+          <label for="email" class="mb-2 block font-mono text-xs uppercase tracking-[0.14em] text-gris">
+            Email corporativo <span class="text-senal" aria-hidden="true">*</span>
+          </label>
+          <input id="email" name="email" type="email" required autocomplete="email" inputmode="email"
+                 placeholder="nombre@empresa.com" aria-describedby="error-email"
+                 class="w-full border border-humo bg-nieve px-4 py-3 text-tinta placeholder:text-gris/50 transition-colors focus:border-senal">
+          <p id="error-email" class="error mt-2 font-mono text-xs text-alerta"></p>
+        </div>
+
+        <div>
+          <label for="telefono" class="mb-2 block font-mono text-xs uppercase tracking-[0.14em] text-gris">
+            Teléfono <span class="text-senal" aria-hidden="true">*</span>
+          </label>
+          <input id="telefono" name="telefono" type="tel" required autocomplete="tel" inputmode="tel"
+                 placeholder="+1 213 555 0147" aria-describedby="ayuda-telefono error-telefono"
+                 class="w-full border border-humo bg-nieve px-4 py-3 text-tinta placeholder:text-gris/50 transition-colors focus:border-senal">
+          <p id="ayuda-telefono" class="mt-2 font-mono text-xs text-gris">Con código de país, empezando por +</p>
+          <p id="error-telefono" class="error mt-2 font-mono text-xs text-alerta"></p>
+        </div>
+
+        <div class="sm:col-span-2">
+          <label for="web" class="mb-2 block font-mono text-xs uppercase tracking-[0.14em] text-gris">
+            Sitio web de la empresa <span class="normal-case tracking-normal text-gris">(opcional)</span>
+          </label>
+          <input id="web" name="web" type="url" autocomplete="url" inputmode="url"
+                 placeholder="https://tumarca.com" aria-describedby="ayuda-web error-web"
+                 class="w-full border border-humo bg-nieve px-4 py-3 text-tinta placeholder:text-gris/50 transition-colors focus:border-senal">
+          <p id="ayuda-web" class="mt-2 font-mono text-xs text-gris">Puedes escribir www.tumarca.com: completamos el https:// por ti</p>
+          <p id="error-web" class="error mt-2 font-mono text-xs text-alerta"></p>
+        </div>
+
+      </div>
+    </fieldset>
+
+    <!-- ---- Bloque 2: operación ---- -->
+    <fieldset class="mt-14 w-full min-w-0 border-t border-humo pt-8">
+      <legend class="mb-6 block w-full font-display text-3xl font-extrabold uppercase leading-none">
+        Tu operación
+      </legend>
+
+      <div class="grid gap-6 sm:grid-cols-2">
+
+        <div>
+          <label for="pais" class="mb-2 block font-mono text-xs uppercase tracking-[0.14em] text-gris">
+            País de operación principal <span class="text-senal" aria-hidden="true">*</span>
+          </label>
+          <select id="pais" name="pais" required aria-describedby="error-pais"
+                  class="w-full border border-humo bg-nieve px-4 py-3 text-tinta transition-colors focus:border-senal">
+            <option value="">Selecciona una opción</option>
+            <option value="estados-unidos">Estados Unidos</option>
+            <option value="espana">España</option>
+            <option value="ambos">Ambos</option>
+            <option value="otro">Otro</option>
+          </select>
+          <p id="error-pais" class="error mt-2 font-mono text-xs text-alerta"></p>
+        </div>
+
+        <div>
+          <label for="producto" class="mb-2 block font-mono text-xs uppercase tracking-[0.14em] text-gris">
+            Tipo de producto <span class="text-senal" aria-hidden="true">*</span>
+          </label>
+          <select id="producto" name="producto" required aria-describedby="error-producto"
+                  class="w-full border border-humo bg-nieve px-4 py-3 text-tinta transition-colors focus:border-senal">
+            <option value="">Selecciona una opción</option>
+            <option value="moda">Moda</option>
+            <option value="electronica">Electrónica</option>
+            <option value="cosmetica">Cosmética</option>
+            <option value="alimentacion">Alimentación</option>
+            <option value="otro">Otro</option>
+          </select>
+          <p id="error-producto" class="error mt-2 font-mono text-xs text-alerta"></p>
+        </div>
+
+        <div class="sm:col-span-2">
+          <label for="volumen" class="mb-2 block font-mono text-xs uppercase tracking-[0.14em] text-gris">
+            Volumen mensual estimado de envíos <span class="text-senal" aria-hidden="true">*</span>
+          </label>
+          <select id="volumen" name="volumen" required aria-describedby="error-volumen"
+                  class="w-full border border-humo bg-nieve px-4 py-3 text-tinta transition-colors focus:border-senal">
+            <option value="">Selecciona una opción</option>
+            <option value="0-100">0-100 envíos/mes</option>
+            <option value="101-500">101-500 envíos/mes</option>
+            <option value="501-2000">501-2000 envíos/mes</option>
+            <option value="2000+">Más de 2000 envíos/mes</option>
+            <option value="no-seguro">No estoy seguro</option>
+          </select>
+          <p id="error-volumen" class="error mt-2 font-mono text-xs text-alerta"></p>
+        </div>
+      </div>
+
+      <!-- Aviso de volumen bajo -->
+      <div id="aviso-volumen" hidden class="mt-6 border-l-4 border-oro bg-oro/25 p-5" role="status">
+        <p class="text-tinta/90">
+          Para volúmenes menores a 100 envíos mensuales, nuestros servicios podrían no ser la solución más eficiente. ¿Seguro que quieres continuar?
+        </p>
+        <div class="mt-4 flex items-start gap-3">
+          <input id="confirmar-volumen" name="confirmar-volumen" type="checkbox"
+                 class="mt-1 h-5 w-5 shrink-0 accent-[#DD0000]" aria-describedby="error-confirmar-volumen">
+          <label for="confirmar-volumen" class="text-sm text-tinta/85">Sí, quiero continuar con la solicitud</label>
+        </div>
+        <p id="error-confirmar-volumen" class="error mt-2 font-mono text-xs text-alerta"></p>
+      </div>
+
+      <!-- Servicios de interés -->
+      <fieldset class="mt-8 w-full min-w-0" aria-describedby="error-servicios">
+        <legend class="mb-3 font-mono text-xs uppercase tracking-[0.14em] text-gris">
+          Servicios de interés <span class="text-senal" aria-hidden="true">*</span>
+          <span class="normal-case tracking-normal">(puedes elegir varios)</span>
+        </legend>
+        <div class="grid gap-3 sm:grid-cols-3">
+          <label class="flex cursor-pointer items-start gap-3 border border-humo bg-nieve p-4 transition-colors hover:border-senal">
+            <input type="checkbox" name="servicios" value="almacenaje" class="mt-0.5 h-5 w-5 shrink-0 accent-[#DD0000]">
+            <span>Almacenaje</span>
+          </label>
+          <label class="flex cursor-pointer items-start gap-3 border border-humo bg-nieve p-4 transition-colors hover:border-senal">
+            <input type="checkbox" name="servicios" value="ultima-milla" class="mt-0.5 h-5 w-5 shrink-0 accent-[#DD0000]">
+            <span>Última milla</span>
+          </label>
+          <label class="flex cursor-pointer items-start gap-3 border border-humo bg-nieve p-4 transition-colors hover:border-senal">
+            <input type="checkbox" name="servicios" value="logistica-inversa" class="mt-0.5 h-5 w-5 shrink-0 accent-[#DD0000]">
+            <span>Logística inversa</span>
+          </label>
+        </div>
+        <p id="error-servicios" class="error mt-2 font-mono text-xs text-alerta"></p>
+      </fieldset>
+
+      <!-- 3PL actual -->
+      <fieldset class="mt-8 w-full min-w-0" aria-describedby="error-tresPL">
+        <legend class="mb-3 font-mono text-xs uppercase tracking-[0.14em] text-gris">
+          ¿Actualmente trabajas con otro 3PL? <span class="text-senal" aria-hidden="true">*</span>
+        </legend>
+        <div class="grid gap-3 sm:grid-cols-3">
+          <label class="flex cursor-pointer items-start gap-3 border border-humo bg-nieve p-4 transition-colors hover:border-senal">
+            <input type="radio" name="tresPL" value="si" class="mt-0.5 h-5 w-5 shrink-0 accent-[#DD0000]">
+            <span>Sí</span>
+          </label>
+          <label class="flex cursor-pointer items-start gap-3 border border-humo bg-nieve p-4 transition-colors hover:border-senal">
+            <input type="radio" name="tresPL" value="no" class="mt-0.5 h-5 w-5 shrink-0 accent-[#DD0000]">
+            <span>No</span>
+          </label>
+          <label class="flex cursor-pointer items-start gap-3 border border-humo bg-nieve p-4 transition-colors hover:border-senal">
+            <input type="radio" name="tresPL" value="evaluando" class="mt-0.5 h-5 w-5 shrink-0 accent-[#DD0000]">
+            <span>Estoy evaluando opciones</span>
+          </label>
+        </div>
+        <p id="error-tresPL" class="error mt-2 font-mono text-xs text-alerta"></p>
+      </fieldset>
+    </fieldset>
+
+    <!-- ---- Bloque 3: detalles ---- -->
+    <fieldset class="mt-14 w-full min-w-0 border-t border-humo pt-8">
+      <legend class="mb-6 block w-full font-display text-3xl font-extrabold uppercase leading-none">
+        Detalles
+      </legend>
+
+      <div>
+        <label for="comentarios" class="mb-2 block font-mono text-xs uppercase tracking-[0.14em] text-gris">
+          Comentarios o necesidades específicas <span class="normal-case tracking-normal text-gris">(opcional)</span>
+        </label>
+        <textarea id="comentarios" name="comentarios" rows="5" aria-describedby="contador error-comentarios"
+                  placeholder="Plataforma que utilizas, picos de temporada, requisitos de packaging…"
+                  class="w-full border border-humo bg-nieve px-4 py-3 text-tinta placeholder:text-gris/50 transition-colors focus:border-senal"></textarea>
+        <p id="contador" class="mt-2 font-mono text-xs text-gris" aria-live="polite">0 / 500</p>
+        <p id="error-comentarios" class="error mt-2 font-mono text-xs text-alerta"></p>
+      </div>
+
+      <div class="mt-8 flex items-start gap-3">
+        <input id="privacidad" name="privacidad" type="checkbox" required aria-describedby="error-privacidad"
+               class="mt-1 h-5 w-5 shrink-0 accent-[#DD0000]">
+        <label for="privacidad" class="text-sm text-tinta/80">
+          Acepto la política de privacidad y que TrackFlow trate mis datos para responder a esta solicitud.
+          <span class="text-senal" aria-hidden="true">*</span>
+        </label>
+      </div>
+      <p id="error-privacidad" class="error mt-2 font-mono text-xs text-alerta"></p>
+    </fieldset>
+
+    <!-- ---- Envío ---- -->
+    <div class="mt-12 flex flex-col items-start gap-5 border-t border-humo pt-8 sm:flex-row sm:items-center">
+      <button type="submit" class="w-full bg-oro px-8 py-4 font-display text-2xl font-extrabold uppercase tracking-wide text-tinta transition-colors hover:bg-tinta hover:text-papel sm:w-auto">
+        Enviar solicitud
+      </button>
+      <p class="font-mono text-xs uppercase leading-relaxed tracking-[0.16em] text-gris">
+        Te respondemos en 24-48 horas laborables
+      </p>
+    </div>
+  </form>
+
+  <!-- ============ MENSAJE DE ÉXITO ============ -->
+  <section id="exito" hidden tabindex="-1" aria-labelledby="titulo-exito" class="mt-12 border-l-4 border-senal bg-nieve p-8 md:p-12">
+    <h2 id="titulo-exito" class="titular font-display text-[clamp(2rem,5vw,3.5rem)] font-black uppercase text-senal">
+      ¡Gracias por tu interés en TrackFlow!
+    </h2>
+    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-tinta/85">
+      Hemos recibido tu solicitud. Nuestro equipo comercial revisará tu información y te contactará en las próximas 24-48 horas para agendar una llamada y conocer tus necesidades logísticas en detalle.
+    </p>
+    <p class="mt-4 max-w-2xl leading-relaxed text-tinta/70">
+      Si tienes alguna consulta urgente, escríbenos directamente a
+      <a href="mailto:comercial@trackflow.com" class="text-senal hover:underline">comercial@trackflow.com</a>
+    </p>
+    <a href="index.html" class="mt-8 inline-block border border-humo px-6 py-3 font-mono text-xs uppercase tracking-[0.16em] text-tinta transition-colors hover:border-senal hover:text-senal">
+      Volver al inicio
+    </a>
+  </section>
+
+</main>
+
+<!-- ============ PIE ============ -->
+<footer class="border-t-4 border-oro bg-tinta text-papel">
+  <div class="mx-auto max-w-5xl px-5 py-10 md:px-8">
+    <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+      <address class="space-y-1 not-italic text-sm text-papel/80">
+        <p><a href="mailto:comercial@trackflow.com" class="hover:text-oro">comercial@trackflow.com</a></p>
+        <p>Los Ángeles, California (EE. UU.) · <a href="tel:+12135550147" class="hover:text-oro">+1 213 555 0147</a></p>
+        <p>Zaragoza, Aragón (España) · <a href="tel:+34976123456" class="hover:text-oro">+34 976 123 456</a></p>
+      </address>
+
+      <a href="https://linkedin.com/company/trackflow" target="_blank" rel="noopener"
+         class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.14em] text-papel hover:text-oro">
+        <svg viewBox="0 0 24 24" class="h-4 w-4" aria-hidden="true" focusable="false" fill="currentColor">
+          <path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.3-.03-2.96-1.8-2.96-1.8 0-2.08 1.4-2.08 2.86V21h-4z"/>
+        </svg>
+        LinkedIn
+      </a>
+    </div>
+
+    <p class="mt-8 border-t border-papel/15 pt-6 font-mono text-xs text-papel/50">© 2025 TrackFlow. Todos los derechos reservados.</p>
+  </div>
+
+  <div aria-hidden="true">
+    <div class="h-2 bg-tinta"></div>
+    <div class="h-2 bg-senal"></div>
+    <div class="h-2 bg-oro"></div>
+  </div>
+</footer>
+
+<script>
+/* =======================================================================
+   1. IDIOMA (español por defecto / inglés)
+   ======================================================================= */
+const DICC = {
+  "Saltar al contenido": "Skip to content",
+  "Icono de camión de TrackFlow": "TrackFlow truck icon",
+  "TrackFlow, volver a la página principal": "TrackFlow, back to the homepage",
+  "Volver": "Back",
+  "Formulario de solicitud": "Application form",
+  "Cuéntanos cómo": "Tell us how you",
+  "mueves tus pedidos": "move your orders",
+  "Rellena estos datos y el equipo comercial preparará una propuesta de operación para tu marca. Se tarda unos dos minutos.": "Fill in these details and our sales team will put together an operations proposal for your brand. It takes about two minutes.",
+  "Los campos marcados con": "Fields marked with",
+  "son obligatorios": "are required",
+  "Revisa estos campos": "Please review these fields",
+
+  "Tu empresa": "Your company",
+  "Nombre de la empresa": "Company name",
+  "Persona de contacto": "Contact person",
+  "Nombre y apellido": "First name and last name",
+  "Email corporativo": "Work email",
+  "Teléfono": "Phone",
+  "Con código de país, empezando por +": "With country code, starting with +",
+  "Sitio web de la empresa": "Company website",
+  "Puedes escribir www.tumarca.com: completamos el https:// por ti": "You can type www.yourbrand.com: we add the https:// for you",
+  "(opcional)": "(optional)",
+
+  "Tu operación": "Your operation",
+  "País de operación principal": "Main country of operation",
+  "Selecciona una opción": "Select an option",
+  "Estados Unidos": "United States",
+  "España": "Spain",
+  "Ambos": "Both",
+  "Otro": "Other",
+  "Tipo de producto": "Product type",
+  "Moda": "Fashion",
+  "Electrónica": "Electronics",
+  "Cosmética": "Cosmetics",
+  "Alimentación": "Food",
+  "Volumen mensual estimado de envíos": "Estimated monthly shipping volume",
+  "0-100 envíos/mes": "0-100 shipments/month",
+  "101-500 envíos/mes": "101-500 shipments/month",
+  "501-2000 envíos/mes": "501-2000 shipments/month",
+  "Más de 2000 envíos/mes": "More than 2000 shipments/month",
+  "No estoy seguro": "Not sure",
+  "Para volúmenes menores a 100 envíos mensuales, nuestros servicios podrían no ser la solución más eficiente. ¿Seguro que quieres continuar?": "For volumes under 100 shipments per month, our services may not be the most efficient solution. Are you sure you want to continue?",
+  "Sí, quiero continuar con la solicitud": "Yes, I want to continue with my request",
+  "Servicios de interés": "Services of interest",
+  "(puedes elegir varios)": "(you can choose several)",
+  "Almacenaje": "Warehousing",
+  "Última milla": "Last mile",
+  "Logística inversa": "Reverse logistics",
+  "¿Actualmente trabajas con otro 3PL?": "Do you currently work with another 3PL?",
+  "Sí": "Yes",
+  "No": "No",
+  "Estoy evaluando opciones": "I am evaluating options",
+
+  "Detalles": "Details",
+  "Comentarios o necesidades específicas": "Comments or specific needs",
+  "Plataforma que utilizas, picos de temporada, requisitos de packaging…": "Platform you use, seasonal peaks, packaging requirements…",
+  "Acepto la política de privacidad y que TrackFlow trate mis datos para responder a esta solicitud.": "I accept the privacy policy and agree that TrackFlow may process my data to answer this request.",
+  "Enviar solicitud": "Send request",
+  "Te respondemos en 24-48 horas laborables": "We reply within 24-48 business hours",
+
+  "¡Gracias por tu interés en TrackFlow!": "Thank you for your interest in TrackFlow!",
+  "Hemos recibido tu solicitud. Nuestro equipo comercial revisará tu información y te contactará en las próximas 24-48 horas para agendar una llamada y conocer tus necesidades logísticas en detalle.": "We have received your request. Our sales team will review your information and contact you within the next 24-48 hours to schedule a call and get to know your logistics needs in detail.",
+  "Si tienes alguna consulta urgente, escríbenos directamente a": "If you have an urgent question, write to us directly at",
+  "Volver al inicio": "Back to homepage",
+
+  "Los Ángeles, California (EE. UU.) ·": "Los Angeles, California (USA) ·",
+  "Zaragoza, Aragón (España) ·": "Zaragoza, Aragón (Spain) ·",
+  "© 2025 TrackFlow. Todos los derechos reservados.": "© 2025 TrackFlow. All rights reserved.",
+
+  "nombre@empresa.com": "name@company.com",
+  "https://tumarca.com": "https://yourbrand.com",
+  
+
+  "__titulo": "Request information — TrackFlow",
+  "__descripcion": "Application form for e-commerce brands looking to outsource their logistics with TrackFlow in the United States and Spain."
+};
+
+/* Mensajes dinámicos: los españoles son los exigidos en el enunciado */
+const MENSAJES = {
+  es: {
+    empresa: "El nombre de la empresa debe tener al menos 2 caracteres",
+    contacto: "Ingresa nombre y apellido del contacto",
+    email: "Ingresa un email corporativo válido (ejemplo: nombre@empresa.com)",
+    telefono: "El teléfono debe incluir código de país (ejemplo: +1 213 555 0147)",
+    web: "Si incluyes sitio web, debe ser una URL válida",
+    pais: "Selecciona el país de operación principal",
+    producto: "Selecciona el tipo de producto que manejas",
+    volumen: "Selecciona el volumen mensual estimado",
+    servicios: "Selecciona al menos un servicio de interés",
+    tresPL: "Indica si actualmente trabajas con otro proveedor logístico",
+    comentarios: restantes => `Los comentarios no pueden exceder 500 caracteres (quedan ${restantes})`,
+    privacidad: "Debes aceptar la política de privacidad para continuar",
+    "confirmar-volumen": "Confirma que quieres continuar con este volumen de envíos",
+    contador: restantes => `${500 - restantes} / 500`
+  },
+  en: {
+    empresa: "The company name must be at least 2 characters long",
+    contacto: "Enter the contact's first name and last name",
+    email: "Enter a valid work email (example: name@company.com)",
+    telefono: "The phone number must include the country code (example: +1 213 555 0147)",
+    web: "If you include a website, it must be a valid URL",
+    pais: "Select the main country of operation",
+    producto: "Select the type of product you handle",
+    volumen: "Select the estimated monthly volume",
+    servicios: "Select at least one service of interest",
+    tresPL: "Tell us whether you currently work with another logistics provider",
+    comentarios: restantes => `Comments cannot exceed 500 characters (${restantes} left)`,
+    privacidad: "You must accept the privacy policy to continue",
+    "confirmar-volumen": "Confirm that you want to continue with this shipping volume",
+    contador: restantes => `${500 - restantes} / 500`
+  }
+};
+
+const normalizar = texto => texto.replace(/\s+/g, ' ').trim();
+const metaDescripcion = document.querySelector('meta[name="description"]');
+const TITULO_ES = document.title;
+const DESC_ES = metaDescripcion ? metaDescripcion.getAttribute('content') : '';
+let idiomaActual = 'es';
+
+const nodosTexto = [];
+const recorrido = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+  acceptNode(nodo) {
+    const padre = nodo.parentElement;
+    if (!padre || padre.tagName === 'SCRIPT' || padre.tagName === 'STYLE') return NodeFilter.FILTER_REJECT;
+    if (padre.classList.contains('error') || padre.id === 'contador') return NodeFilter.FILTER_REJECT;
+    return nodo.nodeValue.trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+  }
+});
+while (recorrido.nextNode()) nodosTexto.push({ nodo: recorrido.currentNode, es: recorrido.currentNode.nodeValue });
+
+const nodosAtributo = [];
+document.querySelectorAll('[aria-label], [alt], [placeholder]').forEach(elemento => {
+  ['aria-label', 'alt', 'placeholder'].forEach(atributo => {
+    const valor = elemento.getAttribute(atributo);
+    if (valor) nodosAtributo.push({ elemento, atributo, es: valor });
+  });
+});
+
+const botonesIdioma = document.querySelectorAll('.btn-idioma');
+
+function aplicarIdioma(idioma) {
+  const en = idioma === 'en';
+
+  nodosTexto.forEach(({ nodo, es }) => {
+    if (!en) { nodo.nodeValue = es; return; }
+    const partes = es.match(/^(\s*)([\s\S]*?)(\s*)$/);
+    const traduccion = DICC[normalizar(partes[2])];
+    nodo.nodeValue = traduccion ? partes[1] + traduccion + partes[3] : es;
+  });
+
+  nodosAtributo.forEach(({ elemento, atributo, es }) => {
+    const traduccion = DICC[normalizar(es)];
+    elemento.setAttribute(atributo, en && traduccion ? traduccion : es);
+  });
+
+  document.documentElement.lang = idioma;
+  document.title = en ? DICC.__titulo : TITULO_ES;
+  if (metaDescripcion) metaDescripcion.setAttribute('content', en ? DICC.__descripcion : DESC_ES);
+  document.querySelectorAll('a[href="index.html"]').forEach(enlace => {
+    enlace.setAttribute('href', en ? 'index.html?lang=en' : 'index.html');
+  });
+
+  botonesIdioma.forEach(boton => boton.setAttribute('aria-pressed', String(boton.dataset.idioma === idioma)));
+  try { localStorage.setItem('trackflow-idioma', idioma); } catch (error) { /* modo privado */ }
+  idiomaActual = idioma;
+
+  actualizarContador();
+  if (document.querySelector('[aria-invalid="true"]')) validarFormulario(false);
+}
+
+botonesIdioma.forEach(boton => boton.addEventListener('click', () => aplicarIdioma(boton.dataset.idioma)));
+
+let idiomaInicial = new URLSearchParams(location.search).get('lang');
+if (idiomaInicial !== 'es' && idiomaInicial !== 'en') {
+  try { idiomaInicial = localStorage.getItem('trackflow-idioma'); } catch (error) { idiomaInicial = null; }
+}
+if (idiomaInicial !== 'es' && idiomaInicial !== 'en') {
+  idiomaInicial = 'es';   // el español es el idioma por defecto
+}
+
+/* =======================================================================
+   2. VALIDACIÓN
+   ======================================================================= */
+const formulario   = document.getElementById('formulario');
+const resumen      = document.getElementById('resumen-errores');
+const listaErrores = document.getElementById('lista-errores');
+const exito        = document.getElementById('exito');
+const comentarios  = document.getElementById('comentarios');
+const contador     = document.getElementById('contador');
+const avisoVolumen = document.getElementById('aviso-volumen');
+const confirmarVol = document.getElementById('confirmar-volumen');
+const selectVolumen  = document.getElementById('volumen');
+const selectProducto = document.getElementById('producto');
+
+const LIMITE_COMENTARIOS = 500;
+const texto = clave => MENSAJES[idiomaActual][clave];
+
+/* Si el usuario escribe "www.tumarca.com" o "tumarca.com", le añadimos https://
+   El enunciado exige que la URL final empiece por http:// o https:// */
+function normalizarWeb() {
+  const campo = document.getElementById('web');
+  const valor = campo.value.trim();
+  if (!valor) { campo.value = ''; return; }
+  const tieneProtocolo = /^[a-z][a-z0-9+.-]*:\/\//i.test(valor);
+  const pareceDominio = /^[^\s/:]+\.[^\s/:]{2,}/.test(valor);
+  campo.value = (!tieneProtocolo && pareceDominio) ? 'https://' + valor : valor;
+}
+
+/* Cada regla devuelve true si el campo es válido */
+const REGLAS = [
+  {
+    nombre: 'empresa',
+    control: () => document.getElementById('empresa'),
+    valida: () => document.getElementById('empresa').value.trim().length >= 2
+  },
+  {
+    nombre: 'contacto',
+    control: () => document.getElementById('contacto'),
+    valida: () => document.getElementById('contacto').value.trim().split(/\s+/).filter(p => p.length >= 2).length >= 2
+  },
+  {
+    nombre: 'email',
+    control: () => document.getElementById('email'),
+    valida: () => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(document.getElementById('email').value.trim())
+  },
+  {
+    nombre: 'telefono',
+    control: () => document.getElementById('telefono'),
+    valida: () => /^\+\d{1,4}[\s.-]?[\d\s().-]{6,}$/.test(document.getElementById('telefono').value.trim())
+  },
+  {
+    nombre: 'web',
+    control: () => document.getElementById('web'),
+    valida() {
+      normalizarWeb();
+      const valor = document.getElementById('web').value.trim();
+      if (!valor) return true;                                  // opcional
+      if (!/^https?:\/\//i.test(valor)) return false;           // debe llevar protocolo
+      try {
+        const url = new URL(valor);
+        const partes = url.hostname.split('.');                 // exige dominio con extensión
+        return partes.length >= 2 && partes.every(Boolean) && partes[partes.length - 1].length >= 2;
+      } catch (error) { return false; }
+    }
+  },
+  { nombre: 'pais',     control: () => document.getElementById('pais'),     valida: () => document.getElementById('pais').value !== '' },
+  { nombre: 'producto', control: () => selectProducto, valida: () => selectProducto.value !== '' },
+  { nombre: 'volumen',  control: () => selectVolumen,  valida: () => selectVolumen.value !== '' },
+  {
+    nombre: 'servicios',
+    control: () => formulario.querySelector('input[name="servicios"]'),
+    valida: () => formulario.querySelectorAll('input[name="servicios"]:checked').length > 0
+  },
+  {
+    nombre: 'tresPL',
+    control: () => formulario.querySelector('input[name="tresPL"]'),
+    valida: () => formulario.querySelectorAll('input[name="tresPL"]:checked').length > 0
+  },
+  {
+    nombre: 'comentarios',
+    control: () => comentarios,
+    valida: () => comentarios.value.length <= LIMITE_COMENTARIOS,
+    argumento: () => Math.max(0, LIMITE_COMENTARIOS - comentarios.value.length)
+  },
+  {
+    nombre: 'confirmar-volumen',
+    control: () => confirmarVol,
+    aplica: () => !avisoVolumen.hidden,
+    valida: () => confirmarVol.checked
+  },
+  {
+    nombre: 'privacidad',
+    control: () => document.getElementById('privacidad'),
+    valida: () => document.getElementById('privacidad').checked
+  }
+];
+
+function pintarError(regla, mensaje) {
+  const parrafo = document.getElementById('error-' + regla.nombre);
+  const control = regla.control();
+  if (parrafo) parrafo.textContent = mensaje || '';
+  if (control) {
+    if (mensaje) control.setAttribute('aria-invalid', 'true');
+    else control.removeAttribute('aria-invalid');
+  }
+
+  // El resumen de arriba se mantiene al día mientras se corrigen campos
+  const linea = document.getElementById('resumen-' + regla.nombre);
+  if (linea && !mensaje) {
+    linea.remove();
+    if (!listaErrores.children.length) resumen.hidden = true;
+  } else if (linea) {
+    linea.querySelector('a').textContent = mensaje;
+  }
+}
+
+function validarFormulario(mostrarResumen) {
+  const fallos = [];
+
+  REGLAS.forEach(regla => {
+    if (regla.aplica && !regla.aplica()) { pintarError(regla, ''); return; }
+
+    if (regla.valida()) {
+      pintarError(regla, '');
+    } else {
+      const plantilla = texto(regla.nombre);
+      const mensaje = typeof plantilla === 'function' ? plantilla(regla.argumento ? regla.argumento() : 0) : plantilla;
+      pintarError(regla, mensaje);
+      fallos.push({ regla, mensaje });
+    }
+  });
+
+  if (mostrarResumen && fallos.length) {
+    listaErrores.innerHTML = '';
+    fallos.forEach(({ regla, mensaje }) => {
+      const item = document.createElement('li');
+      item.id = 'resumen-' + regla.nombre;
+      const enlace = document.createElement('a');
+      enlace.href = '#' + (regla.control() ? regla.control().id : '');
+      enlace.className = 'text-alerta underline underline-offset-4 hover:text-senal';
+      enlace.textContent = mensaje;
+      enlace.addEventListener('click', evento => {
+        evento.preventDefault();
+        const control = regla.control();
+        if (control) control.focus();
+      });
+      item.appendChild(enlace);
+      listaErrores.appendChild(item);
+    });
+    resumen.hidden = false;
+    resumen.focus();
+  } else if (!fallos.length) {
+    resumen.hidden = true;
+  }
+
+  return fallos.length === 0;
+}
+
+/* Contador de caracteres */
+function actualizarContador() {
+  const restantes = LIMITE_COMENTARIOS - comentarios.value.length;
+  contador.textContent = texto('contador')(restantes);
+  contador.className = restantes < 0
+    ? 'mt-2 font-mono text-xs text-alerta'
+    : 'mt-2 font-mono text-xs text-gris';
+}
+comentarios.addEventListener('input', () => {
+  actualizarContador();
+  if (comentarios.getAttribute('aria-invalid') === 'true' || comentarios.value.length > LIMITE_COMENTARIOS) {
+    const regla = REGLAS.find(r => r.nombre === 'comentarios');
+    pintarError(regla, regla.valida() ? '' : texto('comentarios')(regla.argumento()));
+  }
+});
+
+/* Aviso de volumen bajo: 0-100 envíos + tipo de producto elegido */
+function revisarVolumen() {
+  const bajo = selectVolumen.value === '0-100' && selectProducto.value !== '';
+  avisoVolumen.hidden = !bajo;
+  if (!bajo) {
+    confirmarVol.checked = false;
+    pintarError(REGLAS.find(r => r.nombre === 'confirmar-volumen'), '');
+  }
+}
+selectVolumen.addEventListener('change', revisarVolumen);
+selectProducto.addEventListener('change', revisarVolumen);
+
+/* Validación al salir de cada campo, sin molestar mientras se escribe */
+REGLAS.forEach(regla => {
+  const control = regla.control();
+  if (!control) return;
+  const evento = (control.type === 'checkbox' || control.type === 'radio' || control.tagName === 'SELECT') ? 'change' : 'blur';
+  const grupo = formulario.querySelectorAll('[name="' + control.name + '"]');
+  grupo.forEach(elemento => elemento.addEventListener(evento, () => {
+    if (regla.aplica && !regla.aplica()) return;
+    const plantilla = texto(regla.nombre);
+    const mensaje = typeof plantilla === 'function' ? plantilla(regla.argumento ? regla.argumento() : 0) : plantilla;
+    pintarError(regla, regla.valida() ? '' : mensaje);
+  }));
+});
+
+/* Envío simulado */
+formulario.addEventListener('submit', evento => {
+  evento.preventDefault();
+  if (!validarFormulario(true)) return;
+
+  const datos = Object.fromEntries(new FormData(formulario).entries());
+  datos.servicios = [...formulario.querySelectorAll('input[name="servicios"]:checked')].map(s => s.value);
+  console.log('[TrackFlow] Solicitud lista para enviar:', datos);
+
+  formulario.hidden = true;
+  resumen.hidden = true;
+  exito.hidden = false;
+  exito.focus();
+  if (exito.scrollIntoView) exito.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+
+/* Arranque */
+aplicarIdioma(idiomaInicial);
+actualizarContador();
+</script>
+</body>
+</html>

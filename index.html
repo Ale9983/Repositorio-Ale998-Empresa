@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TrackFlow — Logística e-commerce en Estados Unidos y España</title>
+<meta name="description" content="Gestión de almacenes, entregas de última milla y logística inversa en Estados Unidos y España. Más de 15 años operando para marcas de moda, electrónica y cosmética.">
+<meta name="theme-color" content="#F4F3EE">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="TrackFlow — Logística que escala con tu e-commerce">
+<meta property="og:description" content="Almacenes en Los Ángeles y Zaragoza, última milla y logística inversa para marcas de e-commerce.">
+<meta property="og:url" content="https://trackflow.com">
+<meta property="og:locale" content="es_ES">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Tailwind CSS v4 (build de navegador) -->
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<style type="text/tailwindcss">
+  @theme {
+    --color-papel:  #F4F3EE;   /* fondo base */
+    --color-nieve:  #FFFFFF;   /* tarjetas */
+    --color-tinta:  #14141A;   /* texto y bandas oscuras */
+    --color-humo:   #DDDBD3;   /* bordes suaves */
+    --color-gris:   #5B5B62;   /* texto secundario */
+    --color-senal:  #DD0000;   /* rojo bandera */
+    --color-oro:    #FFCE00;   /* amarillo bandera */
+    --color-alerta: #C40000;   /* errores sobre fondo claro */
+
+    --font-display: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
+    --font-sans:    "IBM Plex Sans", system-ui, sans-serif;
+    --font-mono:    "IBM Plex Mono", ui-monospace, monospace;
+  }
+</style>
+
+<style>
+  /* Red de seguridad por si el CDN tarda en compilar */
+  body { background: #F4F3EE; color: #14141A; }
+
+  html { scroll-behavior: smooth; }
+  body { -webkit-font-smoothing: antialiased; }
+
+  a:focus-visible, button:focus-visible, input:focus-visible,
+  select:focus-visible, textarea:focus-visible {
+    outline: 3px solid #DD0000;
+    outline-offset: 3px;
+  }
+
+  .titular { letter-spacing: -0.01em; line-height: 0.88; }
+
+  /* Selector de idioma */
+  .btn-idioma { color: #5B5B62; }
+  .btn-idioma:hover { color: #14141A; }
+  .btn-idioma[aria-pressed="true"] { background: #FFCE00; color: #0B0B0C; }
+
+  /* ---- Camión del hero ---- */
+  .camion  { animation: entrada 1.2s cubic-bezier(.16,.8,.3,1) both, suspension 1.9s ease-in-out 1.2s infinite alternate; }
+  .rueda   { transform-box: fill-box; transform-origin: center; animation: girar .8s linear infinite; }
+  .estelas { animation: estela 1.1s ease-in-out infinite; }
+  .faro    { animation: faro 2.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+
+  @keyframes entrada    { from { transform: translateX(-56px); opacity: 0; } to { transform: none; opacity: 1; } }
+  @keyframes suspension { from { transform: translateY(0); } to { transform: translateY(-4px); } }
+  @keyframes girar      { to { transform: rotate(360deg); } }
+  @keyframes estela     { 0%,100% { opacity: .25; transform: translateX(0); } 50% { opacity: 1; transform: translateX(-14px); } }
+  @keyframes faro       { 0%,100% { opacity: .55; } 50% { opacity: 1; } }
+
+  /* ---- Corredor LAX ⇄ ZAZ ---- */
+  .ruta-camion { animation: recorrido 18s linear infinite; will-change: transform; }
+  @keyframes recorrido { from { transform: translateX(-18%); } to { transform: translateX(100%); } }
+
+  .asfalto-lineas {
+    background-image: repeating-linear-gradient(90deg, #FFCE00 0 26px, transparent 26px 60px);
+    animation: asfalto 1.4s linear infinite;
+  }
+  @keyframes asfalto { to { background-position-x: -60px; } }
+
+  .revelar { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+  .revelar.visible { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .camion, .rueda, .estelas, .faro, .asfalto-lineas { animation: none; }
+    .ruta-camion { animation: none; transform: translateX(42%); }
+    .revelar { opacity: 1; transform: none; transition: none; }
+    *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+  }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "TrackFlow",
+  "description": "Gestión de almacenes y entregas de última milla para e-commerce",
+  "url": "https://trackflow.com",
+  "foundingDate": "2009",
+  "address": [
+    {
+      "@type": "PostalAddress",
+      "addressCountry": "US",
+      "addressLocality": "Los Ángeles",
+      "addressRegion": "California"
+    },
+    {
+      "@type": "PostalAddress",
+      "addressCountry": "ES",
+      "addressLocality": "Zaragoza",
+      "addressRegion": "Aragón"
+    }
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+1-213-555-0147",
+    "contactType": "sales",
+    "availableLanguage": ["Spanish", "English"]
+  },
+  "sameAs": ["https://linkedin.com/company/trackflow"],
+  "areaServed": [
+    {
+      "@type": "Country",
+      "name": "Estados Unidos"
+    },
+    {
+      "@type": "Country",
+      "name": "Spain"
+    }
+  ]
+}
+</script>
+</head>
+
+<body class="bg-papel font-sans text-tinta antialiased">
+
+<a href="#contenido" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:left-4 focus:top-4 focus:bg-oro focus:px-4 focus:py-2 focus:font-mono focus:text-sm focus:text-tinta">Saltar al contenido</a>
+
+<!-- ============ CABECERA ============ -->
+<header class="sticky top-0 z-40 border-b border-humo bg-papel/90 backdrop-blur">
+  <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3 md:px-8">
+
+    <a href="#inicio" class="flex items-center gap-3" aria-label="TrackFlow, ir al inicio">
+      <span class="flex h-10 w-10 items-center justify-center bg-oro">
+        <svg viewBox="0 0 40 28" class="h-6 w-6" role="img" aria-label="Icono de camión de TrackFlow">
+          <title>Icono de camión de TrackFlow</title>
+          <rect x="1" y="4" width="21" height="14" rx="2" fill="#0B0B0C"/>
+          <path d="M24 8h6l5 6h3v4H24z" fill="#0B0B0C"/>
+          <circle cx="9" cy="21" r="4" fill="#0B0B0C"/>
+          <circle cx="30" cy="21" r="4" fill="#0B0B0C"/>
+          <rect x="1" y="11" width="21" height="3" fill="#DD0000"/>
+        </svg>
+      </span>
+      <span class="font-display text-3xl font-extrabold uppercase leading-none tracking-tight">
+        Track<span class="text-senal">Flow</span>
+      </span>
+    </a>
+
+    <nav aria-label="Navegación principal" class="hidden md:block">
+      <ul class="flex items-center gap-8 font-mono text-xs uppercase tracking-[0.18em]">
+        <li><a href="#inicio" class="text-tinta transition-colors hover:text-senal">Inicio</a></li>
+        <li><a href="#servicios" class="text-tinta transition-colors hover:text-senal">Servicios</a></li>
+        <li><a href="#cobertura" class="text-tinta transition-colors hover:text-senal">Cobertura</a></li>
+        <li><a href="#contacto" class="text-tinta transition-colors hover:text-senal">Contacto</a></li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-3">
+
+      <div class="flex items-center border border-humo" role="group" aria-label="Idioma / Language">
+        <button type="button" data-idioma="es" lang="es" aria-pressed="true"
+                class="btn-idioma px-3 py-2 font-mono text-xs uppercase tracking-[0.14em] transition-colors">ES</button>
+        <button type="button" data-idioma="en" lang="en" aria-pressed="false"
+                class="btn-idioma px-3 py-2 font-mono text-xs uppercase tracking-[0.14em] transition-colors">EN</button>
+      </div>
+
+      <a href="application.html" class="hidden bg-oro px-5 py-2.5 font-mono text-xs uppercase tracking-[0.14em] text-tinta transition-colors hover:bg-tinta hover:text-papel md:inline-block">Solicitar información</a>
+
+      <button id="btn-menu" type="button"
+              class="flex h-10 w-10 items-center justify-center border border-humo md:hidden"
+              aria-expanded="false" aria-controls="menu-movil" aria-label="Abrir menú de navegación">
+        <svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true" focusable="false">
+          <path d="M3 6h18M3 12h18M3 18h18" stroke="#14141A" stroke-width="2" stroke-linecap="square"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <nav id="menu-movil" aria-label="Navegación principal móvil" class="hidden border-t border-humo md:hidden">
+    <ul class="flex flex-col px-5 py-2 font-mono text-sm uppercase tracking-[0.14em]">
+      <li><a href="#inicio" class="block border-b border-humo py-3 hover:text-senal">Inicio</a></li>
+      <li><a href="#servicios" class="block border-b border-humo py-3 hover:text-senal">Servicios</a></li>
+      <li><a href="#cobertura" class="block border-b border-humo py-3 hover:text-senal">Cobertura</a></li>
+      <li><a href="#contacto" class="block py-3 text-senal">Contacto</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="contenido">
+
+  <!-- ============ HERO ============ -->
+  <section id="inicio" aria-labelledby="titular-hero" class="relative overflow-hidden border-b border-humo">
+    <div class="mx-auto max-w-7xl px-5 pb-12 pt-14 md:px-8 md:pb-16 md:pt-20 lg:pt-24">
+
+      <p class="mb-6 flex flex-wrap items-center gap-3 font-mono text-xs uppercase tracking-[0.2em] text-gris">
+        <span class="bg-senal px-2 py-1 text-papel">Operador binacional</span>
+        <span>LAX <span aria-hidden="true">⇄</span><span class="sr-only">a</span> ZAZ · desde 2009</span>
+      </p>
+
+      <h1 id="titular-hero" class="titular font-display text-[clamp(3rem,11vw,8rem)] font-black uppercase">
+        Logística que escala<br>
+        <span class="text-senal">con tu e-commerce</span>
+      </h1>
+
+      <div class="mt-10 grid gap-10 lg:grid-cols-[1.15fr_1fr] lg:items-end">
+        <p class="max-w-2xl border-l-4 border-senal pl-5 text-lg leading-relaxed text-tinta/85 md:text-xl">
+          Gestión de almacenes, entregas de última milla y logística inversa en Estados Unidos y España.
+          Más de 15 años ayudando a marcas de moda, electrónica y cosmética a crecer sin preocuparse por la operación.
+        </p>
+
+        <div class="flex flex-col items-start gap-5 sm:flex-row sm:items-center lg:justify-end">
+          <a href="application.html" class="inline-block bg-oro px-8 py-4 font-display text-2xl font-extrabold uppercase tracking-wide text-tinta transition-colors hover:bg-tinta hover:text-papel">
+            Solicitar información
+          </a>
+          <a href="#servicios" class="font-mono text-xs uppercase tracking-[0.16em] text-gris underline decoration-senal decoration-2 underline-offset-8 transition-colors hover:text-senal">
+            Ver servicios
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Camión: pieza principal del hero -->
+    <div class="mx-auto max-w-7xl px-0 md:px-8">
+      <svg viewBox="0 0 760 290" class="w-full" role="img" aria-labelledby="titulo-camion desc-camion">
+        <title id="titulo-camion">Camión de TrackFlow en ruta</title>
+        <desc id="desc-camion">Ilustración lateral de un camión aerodinámico de TrackFlow, en negro con franjas roja y amarilla, circulando sobre una carretera formada por tres bandas: negra, roja y amarilla.</desc>
+
+        <defs>
+          <linearGradient id="g-body" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#35353D"/><stop offset="0.5" stop-color="#1B1B20"/><stop offset="1" stop-color="#0E0E12"/>
+          </linearGradient>
+          <linearGradient id="g-cab" x1="0.15" y1="0" x2="0.85" y2="1">
+            <stop offset="0" stop-color="#3C3C45"/><stop offset="0.55" stop-color="#1C1C22"/><stop offset="1" stop-color="#0D0D11"/>
+          </linearGradient>
+          <linearGradient id="g-glass" x1="0.1" y1="0" x2="0.9" y2="1">
+            <stop offset="0" stop-color="#EDEFF2"/><stop offset="0.45" stop-color="#8D93A0"/><stop offset="1" stop-color="#3A3E48"/>
+          </linearGradient>
+          <linearGradient id="g-slash" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#DD0000"/><stop offset="1" stop-color="#FF4A00"/>
+          </linearGradient>
+          <radialGradient id="g-lamp" cx="0.5" cy="0.5" r="0.5">
+            <stop offset="0" stop-color="#FFCE00" stop-opacity="0.9"/><stop offset="1" stop-color="#FFCE00" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="g-speed" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#DD0000" stop-opacity="0"/><stop offset="0.6" stop-color="#DD0000" stop-opacity="0.5"/><stop offset="1" stop-color="#DD0000" stop-opacity="1"/>
+          </linearGradient>
+        </defs>
+
+        <g class="estelas" stroke="url(#g-speed)" stroke-width="7" stroke-linecap="round">
+          <path d="M8 86 H72"/><path d="M0 124 H48"/><path d="M14 162 H60"/><path d="M2 198 H38"/>
+        </g>
+
+        <g class="camion">
+          <!-- Caja -->
+          <rect x="84" y="46" width="356" height="134" rx="8" fill="url(#g-body)" stroke="#FFCE00" stroke-width="2.5"/>
+          <g stroke="#FFFFFF" stroke-opacity="0.07" stroke-width="2">
+            <path d="M140 52 V174"/><path d="M196 52 V174"/><path d="M252 52 V174"/><path d="M308 52 V174"/><path d="M364 52 V174"/>
+          </g>
+          <path d="M84 58 h356" stroke="#FFFFFF" stroke-opacity="0.16" stroke-width="2"/>
+          <path d="M102 52 V174" stroke="#FFCE00" stroke-opacity="0.35" stroke-width="2"/>
+          <rect x="90" y="100" width="6" height="26" rx="3" fill="#FFCE00" opacity="0.7"/>
+          <path d="M376 46 L412 46 L352 180 L316 180 Z" fill="url(#g-slash)"/>
+          <path d="M420 46 L434 46 L374 180 L360 180 Z" fill="#FFCE00" opacity="0.85"/>
+          <text x="112" y="116" font-family="'Big Shoulders Display',Impact,sans-serif" font-size="46" font-weight="900" textLength="195" lengthAdjust="spacingAndGlyphs"><tspan fill="#F1F0EB">TRACK</tspan><tspan fill="#FFCE00">FLOW</tspan></text>
+          <text x="113" y="144" font-family="'IBM Plex Mono',monospace" font-size="12" fill="#8B8B92" letter-spacing="2">LAX &#8646; ZAZ</text>
+
+          <!-- Deflector -->
+          <path d="M440 60 L462 44 L462 180 L440 180 Z" fill="#15151A" stroke="#FFCE00" stroke-opacity="0.3" stroke-width="1.5"/>
+
+          <!-- Cabina -->
+          <path d="M462 194 V44 H576 C598 44 618 58 628 80 L660 150 C668 168 672 182 672 194 Z"
+                fill="url(#g-cab)" stroke="#FFCE00" stroke-width="2.5" stroke-linejoin="round"/>
+          <path d="M486 62 C486 56 490 52 496 52 H572 C588 52 602 62 609 78 L626 118 C630 127 625 132 617 132 H496 C490 132 486 128 486 122 Z"
+                fill="url(#g-glass)" opacity="0.92"/>
+          <path d="M462 148 H648 L656 168 H462 Z" fill="#DD0000"/>
+          <rect x="470" y="36" width="96" height="9" rx="4" fill="#1C1C22" stroke="#FFCE00" stroke-opacity="0.5" stroke-width="1.5"/>
+          <path d="M614 128 l22 6 v10 l-22 -6 z" fill="#2A2A32"/>
+          <circle class="faro" cx="640" cy="176" r="30" fill="url(#g-lamp)"/>
+          <rect x="634" y="170" width="30" height="11" rx="5" fill="#FFCE00"/>
+
+          <!-- Faldón -->
+          <rect x="84" y="178" width="588" height="16" rx="3" fill="#0E0E12" stroke="#FFCE00" stroke-opacity="0.3" stroke-width="1.5"/>
+
+          <!-- Ruedas -->
+          <g transform="translate(170,212)">
+            <circle r="34" fill="#101014" stroke="#2B2B33" stroke-width="7"/>
+            <g class="rueda">
+              <circle r="16" fill="#1B1B21" stroke="#FFCE00" stroke-width="3"/>
+              <g stroke="#FFCE00" stroke-width="3.5" stroke-linecap="round">
+                <path d="M0 -11 V-4"/><path d="M10.5 3.4 L4 1.2"/><path d="M-10.5 3.4 L-4 1.2"/><path d="M6.5 8.9 L2.5 3.4"/><path d="M-6.5 8.9 L-2.5 3.4"/>
+              </g>
+            </g>
+          </g>
+          <g transform="translate(352,212)">
+            <circle r="34" fill="#101014" stroke="#2B2B33" stroke-width="7"/>
+            <g class="rueda">
+              <circle r="16" fill="#1B1B21" stroke="#FFCE00" stroke-width="3"/>
+              <g stroke="#FFCE00" stroke-width="3.5" stroke-linecap="round">
+                <path d="M0 -11 V-4"/><path d="M10.5 3.4 L4 1.2"/><path d="M-10.5 3.4 L-4 1.2"/><path d="M6.5 8.9 L2.5 3.4"/><path d="M-6.5 8.9 L-2.5 3.4"/>
+              </g>
+            </g>
+          </g>
+          <g transform="translate(586,212)">
+            <circle r="34" fill="#101014" stroke="#2B2B33" stroke-width="7"/>
+            <g class="rueda">
+              <circle r="16" fill="#1B1B21" stroke="#FFCE00" stroke-width="3"/>
+              <g stroke="#FFCE00" stroke-width="3.5" stroke-linecap="round">
+                <path d="M0 -11 V-4"/><path d="M10.5 3.4 L4 1.2"/><path d="M-10.5 3.4 L-4 1.2"/><path d="M6.5 8.9 L2.5 3.4"/><path d="M-6.5 8.9 L-2.5 3.4"/>
+              </g>
+            </g>
+          </g>
+        </g>
+
+        <!-- Carretera: bandera alemana en horizontal -->
+        <rect x="0" y="246" width="760" height="8" fill="#0B0B0C"/>
+        <rect x="0" y="254" width="760" height="8" fill="#DD0000"/>
+        <rect x="0" y="262" width="760" height="8" fill="#FFCE00"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ============ CORREDOR LAX ⇄ ZAZ ============ -->
+  <section aria-label="Corredor entre Los Ángeles y Zaragoza" class="bg-tinta">
+    <div class="mx-auto max-w-7xl px-5 py-10 md:px-8 md:py-12">
+      <div class="flex items-center justify-between font-mono text-xs uppercase tracking-[0.18em] text-papel/60">
+        <span><span class="text-oro">LAX</span> · Los Ángeles</span>
+        <span class="hidden sm:inline">9.020 km de corredor propio</span>
+        <span><span class="text-oro">ZAZ</span> · Zaragoza</span>
+      </div>
+
+      <div class="relative mt-5 h-16 overflow-hidden" aria-hidden="true">
+        <div class="asfalto-lineas absolute inset-x-0 top-1/2 h-[3px] -translate-y-1/2 opacity-40"></div>
+        <div class="ruta-camion absolute bottom-1 w-24">
+          <svg viewBox="0 0 120 46" class="w-24">
+            <rect x="2" y="8" width="62" height="26" rx="3" fill="#17171A" stroke="#FFCE00" stroke-width="2"/>
+            <rect x="2" y="21" width="62" height="6" fill="#DD0000"/>
+            <path d="M66 14h16l12 14h8v6H66z" fill="#17171A" stroke="#FFCE00" stroke-width="2"/>
+            <g transform="translate(22,38)"><g class="rueda"><circle r="6" fill="#0B0B0C" stroke="#F1F0EB" stroke-width="2"/><path d="M0 -4 V4" stroke="#FFCE00" stroke-width="1.5"/></g></g>
+            <g transform="translate(84,38)"><g class="rueda"><circle r="6" fill="#0B0B0C" stroke="#F1F0EB" stroke-width="2"/><path d="M0 -4 V4" stroke="#FFCE00" stroke-width="1.5"/></g></g>
+          </svg>
+        </div>
+        <div class="absolute inset-x-0 bottom-0 h-[6px] bg-oro/70"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SERVICIOS ============ -->
+  <section id="servicios" aria-labelledby="titulo-servicios" class="bg-papel text-tinta">
+    <div class="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-24">
+
+      <div class="mb-12 flex flex-col gap-4 border-b-4 border-tinta pb-6 md:flex-row md:items-end md:justify-between">
+        <h2 id="titulo-servicios" class="titular font-display text-[clamp(2.5rem,6vw,4.5rem)] font-black uppercase">Servicios</h2>
+        <p class="font-mono text-xs uppercase tracking-[0.18em] text-tinta/60">Tres operaciones, un único interlocutor</p>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-3 md:gap-8">
+
+        <article class="revelar flex flex-col border-t-8 border-tinta bg-nieve p-7 shadow-[6px_6px_0_0_#14141A]">
+          <h3 class="font-display text-4xl font-extrabold uppercase leading-none">Gestión de Almacenes</h3>
+          <ul class="mt-6 space-y-4 text-tinta/80">
+            <li class="flex gap-3"><span class="mt-2 h-2 w-4 shrink-0 bg-papel" aria-hidden="true"></span>Almacenamiento, picking y packing</li>
+            <li class="flex gap-3"><span class="mt-2 h-2 w-4 shrink-0 bg-papel" aria-hidden="true"></span>Inventario en tiempo real</li>
+            <li class="flex gap-3"><span class="mt-2 h-2 w-4 shrink-0 bg-papel" aria-hidden="true"></span>Operamos almacenes en Los Ángeles y Zaragoza</li>
+          </ul>
+        </article>
+
+        <article class="revelar flex flex-col border-t-8 border-senal bg-nieve p-7 shadow-[6px_6px_0_0_#DD0000]">
+          <h3 class="font-display text-4xl font-extrabold uppercase leading-none">Entregas de Última Milla</h3>
+          <ul class="mt-6 space-y-4 text-tinta/80">
+            <li class="flex gap-3"><span class="mt-2 h-2 w-4 shrink-0 bg-senal" aria-hidden="true"></span>Red de carriers certificados en ambos países</li>
+            <li class="flex gap-3"><span class="mt-2 h-2 w-4 shrink-0 bg-senal" aria-hidden="true"></span>Seguimiento unificado de envíos</li>
+            <li class="flex gap-3"><span class="mt-2 h-2 w-4 shrink-0 bg-senal" aria-hidden="true"></span>Gestión de incidencias y devoluciones</li>
+          </ul>
+        </article>
+
+        <article class="revelar flex flex-col border-t-8 border-oro bg-nieve p-7 shadow-[6px_6px_0_0_#FFCE00]">
+          <h3 class="font-display text-4xl font-extrabold uppercase leading-none">Logística Inversa</h3>
+          <ul class="mt-6 space-y-4 text-tinta/80">
+            <li class="flex gap-3"><span class="mt-2 h-2 w-4 shrink-0 bg-oro" aria-hidden="true"></span>Gestión completa de devoluciones</li>
+            <li class="flex gap-3"><span class="mt-2 h-2 w-4 shrink-0 bg-oro" aria-hidden="true"></span>Inspección y reacondicionamiento</li>
+            <li class="flex gap-3"><span class="mt-2 h-2 w-4 shrink-0 bg-oro" aria-hidden="true"></span>Integración con tu plataforma de ventas</li>
+          </ul>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COBERTURA ============ -->
+  <section id="cobertura" aria-labelledby="titulo-cobertura" class="border-y border-humo bg-nieve">
+    <div class="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-24">
+
+      <div class="mb-12 flex flex-col gap-4 border-b-4 border-oro pb-6 md:flex-row md:items-end md:justify-between">
+        <h2 id="titulo-cobertura" class="titular font-display text-[clamp(2.5rem,6vw,4.5rem)] font-black uppercase">Cobertura</h2>
+        <p class="font-mono text-xs uppercase tracking-[0.18em] text-gris">Infraestructura propia en dos mercados</p>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-2 md:gap-8">
+
+        <article class="revelar border border-humo bg-papel p-7 md:p-9">
+          <p class="font-mono text-xs uppercase tracking-[0.2em] text-senal">LAX</p>
+          <h3 class="mt-2 font-display text-5xl font-black uppercase leading-none">Estados Unidos</h3>
+          <dl class="mt-8 divide-y divide-humo">
+            <div class="flex flex-col gap-1 py-4 sm:flex-row sm:justify-between sm:gap-6">
+              <dt class="font-mono text-xs uppercase tracking-[0.14em] text-gris">Almacén</dt>
+              <dd class="text-tinta">Los Ángeles</dd>
+            </div>
+            <div class="flex flex-col gap-1 py-4 sm:flex-row sm:justify-between sm:gap-6">
+              <dt class="font-mono text-xs uppercase tracking-[0.14em] text-gris">Alcance</dt>
+              <dd class="text-tinta">Cobertura nacional</dd>
+            </div>
+            <div class="flex flex-col gap-3 py-5 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
+              <dt class="font-mono text-xs uppercase tracking-[0.14em] text-gris">Carriers</dt>
+              <dd class="flex flex-wrap items-center gap-3">
+                <span class="carrier flex h-11 min-w-24 items-center justify-center border border-humo bg-nieve px-4">
+                  <img src="assets/carriers/ups.svg" alt="Logotipo de UPS" class="h-6 w-auto" loading="lazy" onerror="this.remove()">
+                  <span class="etiqueta-carrier font-mono text-sm font-semibold text-tinta">UPS</span>
+                </span>
+                <span class="carrier flex h-11 min-w-24 items-center justify-center border border-humo bg-nieve px-4">
+                  <img src="assets/carriers/fedex.svg" alt="Logotipo de FedEx" class="h-6 w-auto" loading="lazy" onerror="this.remove()">
+                  <span class="etiqueta-carrier font-mono text-sm font-semibold text-tinta">FedEx</span>
+                </span>
+                <span class="carrier flex h-11 min-w-24 items-center justify-center border border-humo bg-nieve px-4">
+                  <img src="assets/carriers/dhl.svg" alt="Logotipo de DHL" class="h-6 w-auto" loading="lazy" onerror="this.remove()">
+                  <span class="etiqueta-carrier font-mono text-sm font-semibold text-tinta">DHL</span>
+                </span>
+              </dd>
+            </div>
+          </dl>
+        </article>
+
+        <article class="revelar border border-humo bg-papel p-7 md:p-9">
+          <p class="font-mono text-xs uppercase tracking-[0.2em] text-senal">ZAZ</p>
+          <h3 class="mt-2 font-display text-5xl font-black uppercase leading-none">España</h3>
+          <dl class="mt-8 divide-y divide-humo">
+            <div class="flex flex-col gap-1 py-4 sm:flex-row sm:justify-between sm:gap-6">
+              <dt class="font-mono text-xs uppercase tracking-[0.14em] text-gris">Almacén</dt>
+              <dd class="text-tinta">Zaragoza</dd>
+            </div>
+            <div class="flex flex-col gap-1 py-4 sm:flex-row sm:justify-between sm:gap-6">
+              <dt class="font-mono text-xs uppercase tracking-[0.14em] text-gris">Alcance</dt>
+              <dd class="text-tinta">Cobertura peninsular e islas</dd>
+            </div>
+            <div class="flex flex-col gap-3 py-5 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
+              <dt class="font-mono text-xs uppercase tracking-[0.14em] text-gris">Carriers</dt>
+              <dd class="flex flex-wrap items-center gap-3">
+                <span class="carrier flex h-11 min-w-24 items-center justify-center border border-humo bg-nieve px-4">
+                  <img src="assets/carriers/mrw.svg" alt="Logotipo de MRW" class="h-6 w-auto" loading="lazy" onerror="this.remove()">
+                  <span class="etiqueta-carrier font-mono text-sm font-semibold text-tinta">MRW</span>
+                </span>
+                <span class="carrier flex h-11 min-w-24 items-center justify-center border border-humo bg-nieve px-4">
+                  <img src="assets/carriers/seur.svg" alt="Logotipo de SEUR" class="h-6 w-auto" loading="lazy" onerror="this.remove()">
+                  <span class="etiqueta-carrier font-mono text-sm font-semibold text-tinta">SEUR</span>
+                </span>
+                <span class="carrier flex h-11 min-w-24 items-center justify-center border border-humo bg-nieve px-4">
+                  <img src="assets/carriers/dhl.svg" alt="Logotipo de DHL" class="h-6 w-auto" loading="lazy" onerror="this.remove()">
+                  <span class="etiqueta-carrier font-mono text-sm font-semibold text-tinta">DHL</span>
+                </span>
+              </dd>
+            </div>
+          </dl>
+        </article>
+
+      </div>
+
+      <p class="mt-6 font-mono text-xs text-gris">Las marcas y logotipos de los carriers pertenecen a sus respectivos titulares.</p>
+    </div>
+  </section>
+
+  <!-- ============ POR QUÉ TRACKFLOW ============ -->
+  <section id="por-que" aria-labelledby="titulo-porque" class="bg-oro text-tinta">
+    <div class="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-24">
+
+      <div class="mb-12 flex flex-col gap-4 border-b-4 border-tinta pb-6 md:flex-row md:items-end md:justify-between">
+        <h2 id="titulo-porque" class="titular font-display text-[clamp(2.5rem,6vw,4.5rem)] font-black uppercase">Por qué TrackFlow</h2>
+        <p class="font-mono text-xs uppercase tracking-[0.18em] text-tinta/70">Cuatro razones para externalizar con nosotros</p>
+      </div>
+
+      <div class="grid gap-px bg-tinta sm:grid-cols-2">
+        <article class="revelar bg-oro p-7 md:p-9">
+          <h3 class="font-display text-3xl font-extrabold uppercase leading-none">Operación binacional</h3>
+          <p class="mt-4 text-tinta/80">El único operador con infraestructura propia en Estados Unidos y España.</p>
+        </article>
+        <article class="revelar bg-oro p-7 md:p-9">
+          <h3 class="font-display text-3xl font-extrabold uppercase leading-none">+130 profesionales</h3>
+          <p class="mt-4 text-tinta/80">Un equipo dedicado en exclusiva a tu logística, no un servicio compartido.</p>
+        </article>
+        <article class="revelar bg-oro p-7 md:p-9">
+          <h3 class="font-display text-3xl font-extrabold uppercase leading-none">Tecnología propia</h3>
+          <p class="mt-4 text-tinta/80">Visibilidad total de tu inventario, en todos los almacenes y en tiempo real.</p>
+        </article>
+        <article class="revelar bg-oro p-7 md:p-9">
+          <h3 class="font-display text-3xl font-extrabold uppercase leading-none">Especialización e-commerce</h3>
+          <p class="mt-4 text-tinta/80">Moda, electrónica y cosmética: sabemos cómo se mueve cada categoría.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACTO ============ -->
+  <section id="contacto" aria-labelledby="titulo-contacto" class="bg-papel">
+    <div class="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-24">
+
+      <div class="mb-12 flex flex-col gap-4 border-b-4 border-senal pb-6 md:flex-row md:items-end md:justify-between">
+        <h2 id="titulo-contacto" class="titular font-display text-[clamp(2.5rem,6vw,4.5rem)] font-black uppercase">Contacto</h2>
+        <p class="font-mono text-xs uppercase tracking-[0.18em] text-gris">Respondemos en menos de 24 horas laborables</p>
+      </div>
+
+      <p class="max-w-2xl text-lg leading-relaxed text-tinta/80">
+        Cuéntanos qué vendes y cuántos pedidos mueves al mes. Te preparamos una propuesta de operación para tu marca.
+      </p>
+
+      <dl class="mt-10 grid gap-px border border-humo bg-humo sm:grid-cols-3">
+        <div class="bg-nieve p-6 md:p-8">
+          <dt class="font-mono text-xs uppercase tracking-[0.16em] text-gris">Email</dt>
+          <dd class="mt-3">
+            <a href="mailto:comercial@trackflow.com" class="text-lg text-senal hover:underline">comercial@trackflow.com</a>
+            <span class="mt-1 block font-mono text-xs text-gris">Equipo comercial</span>
+          </dd>
+        </div>
+        <div class="bg-nieve p-6 md:p-8">
+          <dt class="font-mono text-xs uppercase tracking-[0.16em] text-gris">Los Ángeles</dt>
+          <dd class="mt-3">
+            <a href="tel:+12135550147" class="text-lg text-tinta transition-colors hover:text-senal">+1 213 555 0147</a>
+            <span class="mt-1 block font-mono text-xs text-gris">LAX · California, EE. UU.</span>
+          </dd>
+        </div>
+        <div class="bg-nieve p-6 md:p-8">
+          <dt class="font-mono text-xs uppercase tracking-[0.16em] text-gris">Zaragoza</dt>
+          <dd class="mt-3">
+            <a href="tel:+34976123456" class="text-lg text-tinta transition-colors hover:text-senal">+34 976 123 456</a>
+            <span class="mt-1 block font-mono text-xs text-gris">ZAZ · Aragón, España</span>
+          </dd>
+        </div>
+      </dl>
+
+      <div class="mt-12 flex flex-col items-start gap-6 border-l-4 border-oro pl-6 sm:flex-row sm:items-center sm:gap-8">
+        <a href="application.html" class="inline-block bg-oro px-8 py-4 font-display text-2xl font-extrabold uppercase tracking-wide text-tinta transition-colors hover:bg-tinta hover:text-papel">
+          Solicitar información
+        </a>
+        <p class="font-mono text-xs uppercase leading-relaxed tracking-[0.16em] text-gris">
+          Formulario de solicitud<br>Dos minutos, sin compromiso
+        </p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ PIE ============ -->
+<footer class="border-t-4 border-oro bg-tinta text-papel">
+  <div class="mx-auto max-w-7xl px-5 py-14 md:px-8">
+
+    <div class="grid gap-10 md:grid-cols-3">
+
+      <div>
+        <p class="font-display text-4xl font-black uppercase leading-none">Track<span class="text-oro">Flow</span></p>
+        <p class="mt-4 max-w-xs text-sm text-papel/65">Gestión de almacenes y entregas de última milla para e-commerce. Operando desde 2009.</p>
+      </div>
+
+      <div>
+        <h2 class="font-mono text-xs uppercase tracking-[0.18em] text-oro">Contacto</h2>
+        <address class="mt-4 space-y-2 not-italic text-sm text-papel/80">
+          <p><a href="mailto:comercial@trackflow.com" class="hover:text-oro">comercial@trackflow.com</a></p>
+          <p>Los Ángeles, California (EE. UU.) · <a href="tel:+12135550147" class="hover:text-oro">+1 213 555 0147</a></p>
+          <p>Zaragoza, Aragón (España) · <a href="tel:+34976123456" class="hover:text-oro">+34 976 123 456</a></p>
+        </address>
+      </div>
+
+      <div>
+        <h2 class="font-mono text-xs uppercase tracking-[0.18em] text-oro">Secciones</h2>
+        <nav aria-label="Navegación del pie de página">
+          <ul class="mt-4 space-y-2 text-sm text-papel/80">
+            <li><a href="#inicio" class="hover:text-oro">Inicio</a></li>
+            <li><a href="#servicios" class="hover:text-oro">Servicios</a></li>
+            <li><a href="#cobertura" class="hover:text-oro">Cobertura</a></li>
+            <li><a href="#contacto" class="hover:text-oro">Contacto</a></li>
+            <li><a href="application.html" class="text-oro hover:underline">Solicitar información</a></li>
+          </ul>
+        </nav>
+      </div>
+
+    </div>
+
+    <div class="mt-12 flex flex-col gap-4 border-t border-papel/15 pt-6 sm:flex-row sm:items-center sm:justify-between">
+      <p class="font-mono text-xs text-papel/50">© 2025 TrackFlow. Todos los derechos reservados.</p>
+      <a href="https://linkedin.com/company/trackflow" target="_blank" rel="noopener"
+         class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.14em] text-papel hover:text-oro">
+        <svg viewBox="0 0 24 24" class="h-4 w-4" aria-hidden="true" focusable="false" fill="currentColor">
+          <path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.3-.03-2.96-1.8-2.96-1.8 0-2.08 1.4-2.08 2.86V21h-4z"/>
+        </svg>
+        LinkedIn
+      </a>
+    </div>
+  </div>
+
+  <div aria-hidden="true">
+    <div class="h-2 bg-tinta"></div>
+    <div class="h-2 bg-senal"></div>
+    <div class="h-2 bg-oro"></div>
+  </div>
+</footer>
+
+<script>
+  /* ---------------- Idioma: español (por defecto) / inglés ---------------- */
+  const DICC = {
+    "Saltar al contenido": "Skip to content",
+    "Icono de camión de TrackFlow": "TrackFlow truck icon",
+    "TrackFlow, ir al inicio": "TrackFlow, go to homepage",
+    "Navegación principal": "Main navigation",
+    "Navegación principal móvil": "Main mobile navigation",
+    "Abrir menú de navegación": "Open navigation menu",
+    "Cerrar menú de navegación": "Close navigation menu",
+    "Inicio": "Home",
+    "Servicios": "Services",
+    "Cobertura": "Coverage",
+    "Contacto": "Contact",
+    "Solicitar información": "Request information",
+
+    "Operador binacional": "Binational operator",
+    "ZAZ · desde 2009": "ZAZ · since 2009",
+    "a": "to",
+    "Logística que escala": "Logistics that scales",
+    "con tu e-commerce": "with your e-commerce",
+    "Gestión de almacenes, entregas de última milla y logística inversa en Estados Unidos y España. Más de 15 años ayudando a marcas de moda, electrónica y cosmética a crecer sin preocuparse por la operación.": "Warehouse management, last-mile delivery and reverse logistics in the United States and Spain. Over 15 years helping fashion, electronics and cosmetics brands grow without worrying about operations.",
+    "Ver servicios": "See services",
+    "Camión de TrackFlow en ruta": "TrackFlow truck on the road",
+    "Ilustración lateral de un camión aerodinámico de TrackFlow, en negro con franjas roja y amarilla, circulando sobre una carretera formada por tres bandas: negra, roja y amarilla.": "Side view of an aerodynamic TrackFlow truck, black with red and yellow stripes, driving on a road made of three bands: black, red and yellow.",
+
+    "Corredor entre Los Ángeles y Zaragoza": "Corridor between Los Angeles and Zaragoza",
+    "· Los Ángeles": "· Los Angeles",
+    "9.020 km de corredor propio": "9,020 km of proprietary corridor",
+
+    "Tres operaciones, un único interlocutor": "Three operations, one point of contact",
+    "Gestión de Almacenes": "Warehouse Management",
+    "Almacenamiento, picking y packing": "Storage, picking and packing",
+    "Inventario en tiempo real": "Real-time inventory",
+    "Operamos almacenes en Los Ángeles y Zaragoza": "We operate warehouses in Los Angeles and Zaragoza",
+    "Entregas de Última Milla": "Last-Mile Delivery",
+    "Red de carriers certificados en ambos países": "Certified carrier network in both countries",
+    "Seguimiento unificado de envíos": "Unified shipment tracking",
+    "Gestión de incidencias y devoluciones": "Incident and returns management",
+    "Logística Inversa": "Reverse Logistics",
+    "Gestión completa de devoluciones": "End-to-end returns management",
+    "Inspección y reacondicionamiento": "Inspection and refurbishment",
+    "Integración con tu plataforma de ventas": "Integration with your sales platform",
+
+    "Infraestructura propia en dos mercados": "Our own infrastructure in two markets",
+    "Estados Unidos": "United States",
+    "España": "Spain",
+    "Almacén": "Warehouse",
+    "Los Ángeles": "Los Angeles",
+    "Alcance": "Reach",
+    "Cobertura nacional": "Nationwide coverage",
+    "Cobertura peninsular e islas": "Mainland and islands coverage",
+    "Logotipo de UPS": "UPS logo",
+    "Logotipo de FedEx": "FedEx logo",
+    "Logotipo de DHL": "DHL logo",
+    "Logotipo de MRW": "MRW logo",
+    "Logotipo de SEUR": "SEUR logo",
+    "Las marcas y logotipos de los carriers pertenecen a sus respectivos titulares.": "Carrier brands and logos belong to their respective owners.",
+
+    "Por qué TrackFlow": "Why TrackFlow",
+    "Cuatro razones para externalizar con nosotros": "Four reasons to outsource with us",
+    "Operación binacional": "Binational operation",
+    "El único operador con infraestructura propia en Estados Unidos y España.": "The only operator with its own infrastructure in the United States and Spain.",
+    "+130 profesionales": "+130 professionals",
+    "Un equipo dedicado en exclusiva a tu logística, no un servicio compartido.": "A team dedicated exclusively to your logistics, not a shared service.",
+    "Tecnología propia": "Proprietary technology",
+    "Visibilidad total de tu inventario, en todos los almacenes y en tiempo real.": "Full visibility of your inventory, across every warehouse and in real time.",
+    "Especialización e-commerce": "E-commerce specialization",
+    "Moda, electrónica y cosmética: sabemos cómo se mueve cada categoría.": "Fashion, electronics and cosmetics: we know how each category moves.",
+
+    "Respondemos en menos de 24 horas laborables": "We reply within 24 business hours",
+    "Cuéntanos qué vendes y cuántos pedidos mueves al mes. Te preparamos una propuesta de operación para tu marca.": "Tell us what you sell and how many orders you ship each month. We will put together an operations proposal for your brand.",
+    "Equipo comercial": "Sales team",
+    "LAX · California, EE. UU.": "LAX · California, USA",
+    "ZAZ · Aragón, España": "ZAZ · Aragón, Spain",
+    "Formulario de solicitud": "Application form",
+    "Dos minutos, sin compromiso": "Two minutes, no commitment",
+
+    "Gestión de almacenes y entregas de última milla para e-commerce. Operando desde 2009.": "Warehouse management and last-mile delivery for e-commerce. Operating since 2009.",
+    "Los Ángeles, California (EE. UU.) ·": "Los Angeles, California (USA) ·",
+    "Zaragoza, Aragón (España) ·": "Zaragoza, Aragón (Spain) ·",
+    "Secciones": "Sections",
+    "Navegación del pie de página": "Footer navigation",
+    "© 2025 TrackFlow. Todos los derechos reservados.": "© 2025 TrackFlow. All rights reserved.",
+
+    "__titulo": "TrackFlow — E-commerce logistics in the United States and Spain",
+    "__descripcion": "Warehouse management, last-mile delivery and reverse logistics in the United States and Spain. Over 15 years operating for fashion, electronics and cosmetics brands."
+  };
+
+  const normalizar = texto => texto.replace(/\s+/g, ' ').trim();
+  const metaDescripcion = document.querySelector('meta[name="description"]');
+  const TITULO_ES = document.title;
+  const DESC_ES = metaDescripcion ? metaDescripcion.getAttribute('content') : '';
+  let idiomaActual = 'es';
+
+  // Se guarda el español original una sola vez; el inglés sale del diccionario
+  const nodosTexto = [];
+  const recorrido = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+    acceptNode(nodo) {
+      const padre = nodo.parentElement;
+      if (!padre || padre.tagName === 'SCRIPT' || padre.tagName === 'STYLE') return NodeFilter.FILTER_REJECT;
+      return nodo.nodeValue.trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+    }
+  });
+  while (recorrido.nextNode()) nodosTexto.push({ nodo: recorrido.currentNode, es: recorrido.currentNode.nodeValue });
+
+  const nodosAtributo = [];
+  document.querySelectorAll('[aria-label], [alt], [placeholder]').forEach(elemento => {
+    ['aria-label', 'alt', 'placeholder'].forEach(atributo => {
+      const valor = elemento.getAttribute(atributo);
+      if (valor) nodosAtributo.push({ elemento, atributo, es: valor });
+    });
+  });
+
+  const botonesIdioma = document.querySelectorAll('.btn-idioma');
+
+  function aplicarIdioma(idioma) {
+    const en = idioma === 'en';
+
+    nodosTexto.forEach(({ nodo, es }) => {
+      if (!en) { nodo.nodeValue = es; return; }
+      const partes = es.match(/^(\s*)([\s\S]*?)(\s*)$/);
+      const traduccion = DICC[normalizar(partes[2])];
+      nodo.nodeValue = traduccion ? partes[1] + traduccion + partes[3] : es;
+    });
+
+    nodosAtributo.forEach(({ elemento, atributo, es }) => {
+      const traduccion = DICC[normalizar(es)];
+      elemento.setAttribute(atributo, en && traduccion ? traduccion : es);
+    });
+
+    document.documentElement.lang = idioma;
+    document.title = en ? DICC.__titulo : TITULO_ES;
+    if (metaDescripcion) metaDescripcion.setAttribute('content', en ? DICC.__descripcion : DESC_ES);
+
+    // El formulario hereda el idioma elegido
+    document.querySelectorAll('a[href^="application.html"]').forEach(enlace => {
+      enlace.setAttribute('href', en ? 'application.html?lang=en' : 'application.html');
+    });
+
+    botonesIdioma.forEach(boton => boton.setAttribute('aria-pressed', String(boton.dataset.idioma === idioma)));
+    try { localStorage.setItem('trackflow-idioma', idioma); } catch (error) { /* modo privado */ }
+    idiomaActual = idioma;
+  }
+
+  botonesIdioma.forEach(boton => boton.addEventListener('click', () => aplicarIdioma(boton.dataset.idioma)));
+
+  // Prioridad: ?lang= en la URL > última elección > idioma del navegador
+  let idiomaInicial = new URLSearchParams(location.search).get('lang');
+  if (idiomaInicial !== 'es' && idiomaInicial !== 'en') {
+    try { idiomaInicial = localStorage.getItem('trackflow-idioma'); } catch (error) { idiomaInicial = null; }
+  }
+  if (idiomaInicial !== 'es' && idiomaInicial !== 'en') {
+    idiomaInicial = 'es';   // el español es el idioma por defecto
+  }
+  aplicarIdioma(idiomaInicial);
+
+  // Menú móvil
+  const btnMenu = document.getElementById('btn-menu');
+  const menuMovil = document.getElementById('menu-movil');
+
+  btnMenu.addEventListener('click', () => {
+    const abierto = btnMenu.getAttribute('aria-expanded') === 'true';
+    btnMenu.setAttribute('aria-expanded', String(!abierto));
+    const etiqueta = abierto ? 'Abrir menú de navegación' : 'Cerrar menú de navegación';
+    btnMenu.setAttribute('aria-label', idiomaActual === 'en' ? DICC[etiqueta] : etiqueta);
+    menuMovil.classList.toggle('hidden', abierto);
+  });
+
+  menuMovil.querySelectorAll('a').forEach(enlace => {
+    enlace.addEventListener('click', () => {
+      menuMovil.classList.add('hidden');
+      btnMenu.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Logos de carriers: si el archivo existe, el texto pasa a ser solo para lectores de pantalla
+  document.querySelectorAll('.carrier img').forEach(logo => {
+    logo.addEventListener('load', () => {
+      const etiqueta = logo.parentElement.querySelector('.etiqueta-carrier');
+      if (etiqueta) etiqueta.className = 'sr-only';
+    });
+  });
+
+  // Reveals al hacer scroll
+  const observador = new IntersectionObserver(entradas => {
+    entradas.forEach(entrada => {
+      if (entrada.isIntersecting) {
+        entrada.target.classList.add('visible');
+        observador.unobserve(entrada.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.revelar').forEach(el => observador.observe(el));
+</script>
+</body>
+</html>
