@@ -1,12 +1,35 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth motion-reduce:scroll-auto">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Solicitar información — TrackFlow</title>
 <meta name="description" content="Formulario de solicitud para marcas de e-commerce que quieren externalizar su logística con TrackFlow en Estados Unidos y España.">
 <meta name="theme-color" content="#F4F3EE">
-<meta name="robots" content="noindex, follow">
+
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="TrackFlow">
+<link rel="canonical" href="https://trackflow.com/application.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="TrackFlow">
+<meta property="og:title" content="Solicitar información — TrackFlow">
+<meta property="og:description" content="Cuéntanos el volumen y los mercados de tu tienda y te preparamos una propuesta logística a medida.">
+<meta property="og:url" content="https://trackflow.com/application.html">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:image" content="https://trackflow.com/og-image.svg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TrackFlow — logística para e-commerce entre Los Ángeles y Zaragoza">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Solicitar información — TrackFlow">
+<meta name="twitter:description" content="Cuéntanos el volumen y los mercados de tu tienda y te preparamos una propuesta logística a medida.">
+<meta name="twitter:image" content="https://trackflow.com/og-image.svg">
+<meta name="twitter:image:alt" content="TrackFlow — logística para e-commerce entre Los Ángeles y Zaragoza">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,80 +54,87 @@
   }
 </style>
 
-<style>
-  body { background: #F4F3EE; color: #14141A; -webkit-font-smoothing: antialiased; }
-  html { scroll-behavior: smooth; }
-
-  a:focus-visible, button:focus-visible, input:focus-visible,
-  select:focus-visible, textarea:focus-visible {
-    outline: 3px solid #DD0000;
-    outline-offset: 3px;
-  }
-
-  .titular { letter-spacing: -0.01em; line-height: 0.9; }
-
-  /* Los fieldset traen un min-width intrínseco que rompe los grids dentro */
-  fieldset { min-width: 0; }
-  legend { display: block; width: 100%; }
-
-  .btn-idioma { color: #5B5B62; }
-  .btn-idioma:hover { color: #14141A; }
-  .btn-idioma[aria-pressed="true"] { background: #FFCE00; color: #0B0B0C; }
-
-  /* Estado de error en cualquier control */
-  [aria-invalid="true"] { border-color: #C40000 !important; }
-  .error:empty { display: none; }
-
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
-  }
-</style>
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "TrackFlow",
-  "description": "Gestión de almacenes y entregas de última milla para e-commerce",
-  "url": "https://trackflow.com",
-  "foundingDate": "2009",
-  "address": [
+  "@graph": [
     {
-      "@type": "PostalAddress",
-      "addressCountry": "US",
-      "addressLocality": "Los Ángeles",
-      "addressRegion": "California"
+      "@type": "Organization",
+      "@id": "https://trackflow.com/#organizacion",
+      "name": "TrackFlow",
+      "legalName": "TrackFlow Logistics",
+      "description": "Gestión de almacenes y entregas de última milla para e-commerce",
+      "url": "https://trackflow.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://trackflow.com/favicon.svg",
+        "width": 512,
+        "height": 512
+      },
+      "image": "https://trackflow.com/og-image.svg",
+      "foundingDate": "2009",
+      "address": [
+        {
+          "@type": "PostalAddress",
+          "addressCountry": "US",
+          "addressLocality": "Los Ángeles",
+          "addressRegion": "California"
+        },
+        {
+          "@type": "PostalAddress",
+          "addressCountry": "ES",
+          "addressLocality": "Zaragoza",
+          "addressRegion": "Aragón"
+        }
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+1-213-555-0147",
+        "contactType": "sales",
+        "availableLanguage": ["Spanish", "English"]
+      },
+      "sameAs": ["https://linkedin.com/company/trackflow"],
+      "areaServed": [
+        { "@type": "Country", "name": "Estados Unidos" },
+        { "@type": "Country", "name": "Spain" }
+      ],
+      "knowsLanguage": ["es", "en"]
     },
     {
-      "@type": "PostalAddress",
-      "addressCountry": "ES",
-      "addressLocality": "Zaragoza",
-      "addressRegion": "Aragón"
-    }
-  ],
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "telephone": "+1-213-555-0147",
-    "contactType": "sales",
-    "availableLanguage": ["Spanish", "English"]
-  },
-  "sameAs": ["https://linkedin.com/company/trackflow"],
-  "areaServed": [
-    {
-      "@type": "Country",
-      "name": "Estados Unidos"
+      "@type": "ContactPage",
+      "@id": "https://trackflow.com/application.html#pagina",
+      "url": "https://trackflow.com/application.html",
+      "name": "Solicitar información — TrackFlow",
+      "description": "Formulario de solicitud para marcas de e-commerce que quieren externalizar su logística con TrackFlow.",
+      "inLanguage": "es",
+      "isPartOf": { "@id": "https://trackflow.com/#sitio" },
+      "about": { "@id": "https://trackflow.com/#organizacion" },
+      "breadcrumb": { "@id": "https://trackflow.com/application.html#migas" }
     },
     {
-      "@type": "Country",
-      "name": "Spain"
+      "@type": "BreadcrumbList",
+      "@id": "https://trackflow.com/application.html#migas",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://trackflow.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Solicitar información",
+          "item": "https://trackflow.com/application.html"
+        }
+      ]
     }
   ]
 }
 </script>
 </head>
 
-<body class="bg-papel font-sans text-tinta antialiased">
+<body class="bg-papel font-sans text-tinta antialiased [&_:focus-visible]:outline-3 [&_:focus-visible]:outline-offset-[3px] [&_:focus-visible]:outline-senal">
 
 <a href="#contenido" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:left-4 focus:top-4 focus:bg-oro focus:px-4 focus:py-2 focus:font-mono focus:text-sm focus:text-tinta">Saltar al contenido</a>
 
@@ -131,9 +161,9 @@
     <div class="flex items-center gap-3">
       <div class="flex items-center border border-humo" role="group" aria-label="Idioma / Language">
         <button type="button" data-idioma="es" lang="es" aria-pressed="true"
-                class="btn-idioma px-3 py-2 font-mono text-xs uppercase tracking-[0.14em] transition-colors">ES</button>
+                class="btn-idioma px-3 py-2 font-mono text-xs uppercase tracking-[0.14em] text-gris transition-colors hover:text-tinta aria-pressed:bg-oro aria-pressed:text-tinta">ES</button>
         <button type="button" data-idioma="en" lang="en" aria-pressed="false"
-                class="btn-idioma px-3 py-2 font-mono text-xs uppercase tracking-[0.14em] transition-colors">EN</button>
+                class="btn-idioma px-3 py-2 font-mono text-xs uppercase tracking-[0.14em] text-gris transition-colors hover:text-tinta aria-pressed:bg-oro aria-pressed:text-tinta">EN</button>
       </div>
 
       <a href="index.html" class="border border-humo px-4 py-2 font-mono text-xs uppercase tracking-[0.14em] text-tinta transition-colors hover:border-senal hover:text-senal">Volver</a>
@@ -148,7 +178,7 @@
     <p class="mb-5 font-mono text-xs uppercase tracking-[0.2em] text-gris">
       <span class="bg-senal px-2 py-1 text-papel">Formulario de solicitud</span>
     </p>
-    <h1 class="titular font-display text-[clamp(2.5rem,8vw,5.5rem)] font-black uppercase">
+    <h1 class="font-display text-[clamp(2.5rem,8vw,5.5rem)] font-black uppercase leading-[0.9] tracking-[-0.01em]">
       Cuéntanos cómo<br><span class="text-senal">mueves tus pedidos</span>
     </h1>
     <p class="mt-6 max-w-2xl text-lg leading-relaxed text-tinta/80">
@@ -183,8 +213,8 @@
           </label>
           <input id="empresa" name="empresa" type="text" required minlength="2" autocomplete="organization"
                  aria-describedby="error-empresa"
-                 class="w-full border border-humo bg-nieve px-4 py-3 text-tinta transition-colors focus:border-senal">
-          <p id="error-empresa" class="error mt-2 font-mono text-xs text-alerta"></p>
+                 class="w-full border border-humo bg-nieve px-4 py-3 text-tinta transition-colors focus:border-senal aria-[invalid=true]:border-alerta!">
+          <p id="error-empresa" class="error mt-2 font-mono text-xs text-alerta empty:hidden"></p>
         </div>
 
         <div>
@@ -193,9 +223,9 @@
           </label>
           <input id="contacto" name="contacto" type="text" required autocomplete="name"
                  aria-describedby="ayuda-contacto error-contacto"
-                 class="w-full border border-humo bg-nieve px-4 py-3 text-tinta transition-colors focus:border-senal">
+                 class="w-full border border-humo bg-nieve px-4 py-3 text-tinta transition-colors focus:border-senal aria-[invalid=true]:border-alerta!">
           <p id="ayuda-contacto" class="mt-2 font-mono text-xs text-gris">Nombre y apellido</p>
-          <p id="error-contacto" class="error mt-2 font-mono text-xs text-alerta"></p>
+          <p id="error-contacto" class="error mt-2 font-mono text-xs text-alerta empty:hidden"></p>
         </div>
 
         <div>
@@ -204,8 +234,8 @@
           </label>
           <input id="email" name="email" type="email" required autocomplete="email" inputmode="email"
                  placeholder="nombre@empresa.com" aria-describedby="error-email"
-                 class="w-full border border-humo bg-nieve px-4 py-3 text-tinta placeholder:text-gris/50 transition-colors focus:border-senal">
-          <p id="error-email" class="error mt-2 font-mono text-xs text-alerta"></p>
+                 class="w-full border border-humo bg-nieve px-4 py-3 text-tinta placeholder:text-gris/50 transition-colors focus:border-senal aria-[invalid=true]:border-alerta!">
+          <p id="error-email" class="error mt-2 font-mono text-xs text-alerta empty:hidden"></p>
         </div>
 
         <div>
@@ -214,9 +244,9 @@
           </label>
           <input id="telefono" name="telefono" type="tel" required autocomplete="tel" inputmode="tel"
                  placeholder="+1 213 555 0147" aria-describedby="ayuda-telefono error-telefono"
-                 class="w-full border border-humo bg-nieve px-4 py-3 text-tinta placeholder:text-gris/50 transition-colors focus:border-senal">
+                 class="w-full border border-humo bg-nieve px-4 py-3 text-tinta placeholder:text-gris/50 transition-colors focus:border-senal aria-[invalid=true]:border-alerta!">
           <p id="ayuda-telefono" class="mt-2 font-mono text-xs text-gris">Con código de país, empezando por +</p>
-          <p id="error-telefono" class="error mt-2 font-mono text-xs text-alerta"></p>
+          <p id="error-telefono" class="error mt-2 font-mono text-xs text-alerta empty:hidden"></p>
         </div>
 
         <div class="sm:col-span-2">
@@ -225,9 +255,9 @@
           </label>
           <input id="web" name="web" type="url" autocomplete="url" inputmode="url"
                  placeholder="https://tumarca.com" aria-describedby="ayuda-web error-web"
-                 class="w-full border border-humo bg-nieve px-4 py-3 text-tinta placeholder:text-gris/50 transition-colors focus:border-senal">
+                 class="w-full border border-humo bg-nieve px-4 py-3 text-tinta placeholder:text-gris/50 transition-colors focus:border-senal aria-[invalid=true]:border-alerta!">
           <p id="ayuda-web" class="mt-2 font-mono text-xs text-gris">Puedes escribir www.tumarca.com: completamos el https:// por ti</p>
-          <p id="error-web" class="error mt-2 font-mono text-xs text-alerta"></p>
+          <p id="error-web" class="error mt-2 font-mono text-xs text-alerta empty:hidden"></p>
         </div>
 
       </div>
@@ -246,14 +276,14 @@
             País de operación principal <span class="text-senal" aria-hidden="true">*</span>
           </label>
           <select id="pais" name="pais" required aria-describedby="error-pais"
-                  class="w-full border border-humo bg-nieve px-4 py-3 text-tinta transition-colors focus:border-senal">
+                  class="w-full border border-humo bg-nieve px-4 py-3 text-tinta transition-colors focus:border-senal aria-[invalid=true]:border-alerta!">
             <option value="">Selecciona una opción</option>
             <option value="estados-unidos">Estados Unidos</option>
             <option value="espana">España</option>
             <option value="ambos">Ambos</option>
             <option value="otro">Otro</option>
           </select>
-          <p id="error-pais" class="error mt-2 font-mono text-xs text-alerta"></p>
+          <p id="error-pais" class="error mt-2 font-mono text-xs text-alerta empty:hidden"></p>
         </div>
 
         <div>
@@ -261,7 +291,7 @@
             Tipo de producto <span class="text-senal" aria-hidden="true">*</span>
           </label>
           <select id="producto" name="producto" required aria-describedby="error-producto"
-                  class="w-full border border-humo bg-nieve px-4 py-3 text-tinta transition-colors focus:border-senal">
+                  class="w-full border border-humo bg-nieve px-4 py-3 text-tinta transition-colors focus:border-senal aria-[invalid=true]:border-alerta!">
             <option value="">Selecciona una opción</option>
             <option value="moda">Moda</option>
             <option value="electronica">Electrónica</option>
@@ -269,7 +299,7 @@
             <option value="alimentacion">Alimentación</option>
             <option value="otro">Otro</option>
           </select>
-          <p id="error-producto" class="error mt-2 font-mono text-xs text-alerta"></p>
+          <p id="error-producto" class="error mt-2 font-mono text-xs text-alerta empty:hidden"></p>
         </div>
 
         <div class="sm:col-span-2">
@@ -277,7 +307,7 @@
             Volumen mensual estimado de envíos <span class="text-senal" aria-hidden="true">*</span>
           </label>
           <select id="volumen" name="volumen" required aria-describedby="error-volumen"
-                  class="w-full border border-humo bg-nieve px-4 py-3 text-tinta transition-colors focus:border-senal">
+                  class="w-full border border-humo bg-nieve px-4 py-3 text-tinta transition-colors focus:border-senal aria-[invalid=true]:border-alerta!">
             <option value="">Selecciona una opción</option>
             <option value="0-100">0-100 envíos/mes</option>
             <option value="101-500">101-500 envíos/mes</option>
@@ -285,7 +315,7 @@
             <option value="2000+">Más de 2000 envíos/mes</option>
             <option value="no-seguro">No estoy seguro</option>
           </select>
-          <p id="error-volumen" class="error mt-2 font-mono text-xs text-alerta"></p>
+          <p id="error-volumen" class="error mt-2 font-mono text-xs text-alerta empty:hidden"></p>
         </div>
       </div>
 
@@ -299,12 +329,12 @@
                  class="mt-1 h-5 w-5 shrink-0 accent-[#DD0000]" aria-describedby="error-confirmar-volumen">
           <label for="confirmar-volumen" class="text-sm text-tinta/85">Sí, quiero continuar con la solicitud</label>
         </div>
-        <p id="error-confirmar-volumen" class="error mt-2 font-mono text-xs text-alerta"></p>
+        <p id="error-confirmar-volumen" class="error mt-2 font-mono text-xs text-alerta empty:hidden"></p>
       </div>
 
       <!-- Servicios de interés -->
       <fieldset class="mt-8 w-full min-w-0" aria-describedby="error-servicios">
-        <legend class="mb-3 font-mono text-xs uppercase tracking-[0.14em] text-gris">
+        <legend class="mb-3 block w-full font-mono text-xs uppercase tracking-[0.14em] text-gris">
           Servicios de interés <span class="text-senal" aria-hidden="true">*</span>
           <span class="normal-case tracking-normal">(puedes elegir varios)</span>
         </legend>
@@ -322,12 +352,12 @@
             <span>Logística inversa</span>
           </label>
         </div>
-        <p id="error-servicios" class="error mt-2 font-mono text-xs text-alerta"></p>
+        <p id="error-servicios" class="error mt-2 font-mono text-xs text-alerta empty:hidden"></p>
       </fieldset>
 
       <!-- 3PL actual -->
       <fieldset class="mt-8 w-full min-w-0" aria-describedby="error-tresPL">
-        <legend class="mb-3 font-mono text-xs uppercase tracking-[0.14em] text-gris">
+        <legend class="mb-3 block w-full font-mono text-xs uppercase tracking-[0.14em] text-gris">
           ¿Actualmente trabajas con otro 3PL? <span class="text-senal" aria-hidden="true">*</span>
         </legend>
         <div class="grid gap-3 sm:grid-cols-3">
@@ -344,7 +374,7 @@
             <span>Estoy evaluando opciones</span>
           </label>
         </div>
-        <p id="error-tresPL" class="error mt-2 font-mono text-xs text-alerta"></p>
+        <p id="error-tresPL" class="error mt-2 font-mono text-xs text-alerta empty:hidden"></p>
       </fieldset>
     </fieldset>
 
@@ -360,9 +390,9 @@
         </label>
         <textarea id="comentarios" name="comentarios" rows="5" aria-describedby="contador error-comentarios"
                   placeholder="Plataforma que utilizas, picos de temporada, requisitos de packaging…"
-                  class="w-full border border-humo bg-nieve px-4 py-3 text-tinta placeholder:text-gris/50 transition-colors focus:border-senal"></textarea>
+                  class="w-full border border-humo bg-nieve px-4 py-3 text-tinta placeholder:text-gris/50 transition-colors focus:border-senal aria-[invalid=true]:border-alerta!"></textarea>
         <p id="contador" class="mt-2 font-mono text-xs text-gris" aria-live="polite">0 / 500</p>
-        <p id="error-comentarios" class="error mt-2 font-mono text-xs text-alerta"></p>
+        <p id="error-comentarios" class="error mt-2 font-mono text-xs text-alerta empty:hidden"></p>
       </div>
 
       <div class="mt-8 flex items-start gap-3">
@@ -373,13 +403,16 @@
           <span class="text-senal" aria-hidden="true">*</span>
         </label>
       </div>
-      <p id="error-privacidad" class="error mt-2 font-mono text-xs text-alerta"></p>
+      <p id="error-privacidad" class="error mt-2 font-mono text-xs text-alerta empty:hidden"></p>
     </fieldset>
 
     <!-- ---- Envío ---- -->
-    <div class="mt-12 flex flex-col items-start gap-5 border-t border-humo pt-8 sm:flex-row sm:items-center">
+    <div class="mt-12 flex flex-col items-start gap-5 border-t border-humo pt-8 sm:flex-row sm:flex-wrap sm:items-center">
       <button type="submit" class="w-full bg-oro px-8 py-4 font-display text-2xl font-extrabold uppercase tracking-wide text-tinta transition-colors hover:bg-tinta hover:text-papel sm:w-auto">
         Enviar solicitud
+      </button>
+      <button type="reset" class="w-full border border-humo bg-nieve px-8 py-4 font-display text-2xl font-extrabold uppercase tracking-wide text-tinta transition-colors hover:border-senal hover:bg-tinta hover:text-papel sm:w-auto">
+        Limpiar formulario
       </button>
       <p class="font-mono text-xs uppercase leading-relaxed tracking-[0.16em] text-gris">
         Te respondemos en 24-48 horas laborables
@@ -389,7 +422,7 @@
 
   <!-- ============ MENSAJE DE ÉXITO ============ -->
   <section id="exito" hidden tabindex="-1" aria-labelledby="titulo-exito" class="mt-12 border-l-4 border-senal bg-nieve p-8 md:p-12">
-    <h2 id="titulo-exito" class="titular font-display text-[clamp(2rem,5vw,3.5rem)] font-black uppercase text-senal">
+    <h2 id="titulo-exito" class="font-display text-[clamp(2rem,5vw,3.5rem)] font-black uppercase leading-[0.9] tracking-[-0.01em] text-senal">
       ¡Gracias por tu interés en TrackFlow!
     </h2>
     <p class="mt-6 max-w-2xl text-lg leading-relaxed text-tinta/85">
@@ -498,6 +531,7 @@ const DICC = {
   "Plataforma que utilizas, picos de temporada, requisitos de packaging…": "Platform you use, seasonal peaks, packaging requirements…",
   "Acepto la política de privacidad y que TrackFlow trate mis datos para responder a esta solicitud.": "I accept the privacy policy and agree that TrackFlow may process my data to answer this request.",
   "Enviar solicitud": "Send request",
+  "Limpiar formulario": "Clear form",
   "Te respondemos en 24-48 horas laborables": "We reply within 24-48 business hours",
 
   "¡Gracias por tu interés en TrackFlow!": "Thank you for your interest in TrackFlow!",
@@ -834,6 +868,19 @@ formulario.addEventListener('submit', evento => {
   exito.hidden = false;
   exito.focus();
   if (exito.scrollIntoView) exito.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+
+/* Limpiar formulario: el reset nativo solo vacía los campos, el resto lo devolvemos a cero aquí */
+formulario.addEventListener('reset', () => {
+  requestAnimationFrame(() => {
+    REGLAS.forEach(regla => pintarError(regla, ''));
+    listaErrores.innerHTML = '';
+    resumen.hidden = true;
+    avisoVolumen.hidden = true;
+    confirmarVol.checked = false;
+    actualizarContador();
+    document.getElementById('empresa').focus();
+  });
 });
 
 /* Arranque */

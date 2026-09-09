@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth motion-reduce:scroll-auto">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,11 +7,29 @@
 <meta name="description" content="Gestión de almacenes, entregas de última milla y logística inversa en Estados Unidos y España. Más de 15 años operando para marcas de moda, electrónica y cosmética.">
 <meta name="theme-color" content="#F4F3EE">
 
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="TrackFlow">
+<link rel="canonical" href="https://trackflow.com/">
+
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="TrackFlow">
 <meta property="og:title" content="TrackFlow — Logística que escala con tu e-commerce">
 <meta property="og:description" content="Almacenes en Los Ángeles y Zaragoza, última milla y logística inversa para marcas de e-commerce.">
-<meta property="og:url" content="https://trackflow.com">
+<meta property="og:url" content="https://trackflow.com/">
 <meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:image" content="https://trackflow.com/og-image.svg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TrackFlow — logística para e-commerce entre Los Ángeles y Zaragoza">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TrackFlow — Logística que escala con tu e-commerce">
+<meta name="twitter:description" content="Almacenes en Los Ángeles y Zaragoza, última milla y logística inversa para marcas de e-commerce.">
+<meta name="twitter:image" content="https://trackflow.com/og-image.svg">
+<meta name="twitter:image:alt" content="TrackFlow — logística para e-commerce entre Los Ángeles y Zaragoza">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,107 +51,94 @@
     --font-display: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
     --font-sans:    "IBM Plex Sans", system-ui, sans-serif;
     --font-mono:    "IBM Plex Mono", ui-monospace, monospace;
-  }
-</style>
 
-<style>
-  /* Red de seguridad por si el CDN tarda en compilar */
-  body { background: #F4F3EE; color: #14141A; }
+    --animate-camion:  entrada 1.2s cubic-bezier(.16,.8,.3,1) both, suspension 1.9s ease-in-out 1.2s infinite alternate;
+    --animate-rueda:   girar .8s linear infinite;
+    --animate-estela:  estela 1.1s ease-in-out infinite;
+    --animate-faro:    faro 2.4s ease-in-out infinite;
+    --animate-ruta:    recorrido 18s linear infinite;
+    --animate-asfalto: asfalto 1.4s linear infinite;
 
-  html { scroll-behavior: smooth; }
-  body { -webkit-font-smoothing: antialiased; }
-
-  a:focus-visible, button:focus-visible, input:focus-visible,
-  select:focus-visible, textarea:focus-visible {
-    outline: 3px solid #DD0000;
-    outline-offset: 3px;
-  }
-
-  .titular { letter-spacing: -0.01em; line-height: 0.88; }
-
-  /* Selector de idioma */
-  .btn-idioma { color: #5B5B62; }
-  .btn-idioma:hover { color: #14141A; }
-  .btn-idioma[aria-pressed="true"] { background: #FFCE00; color: #0B0B0C; }
-
-  /* ---- Camión del hero ---- */
-  .camion  { animation: entrada 1.2s cubic-bezier(.16,.8,.3,1) both, suspension 1.9s ease-in-out 1.2s infinite alternate; }
-  .rueda   { transform-box: fill-box; transform-origin: center; animation: girar .8s linear infinite; }
-  .estelas { animation: estela 1.1s ease-in-out infinite; }
-  .faro    { animation: faro 2.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
-
-  @keyframes entrada    { from { transform: translateX(-56px); opacity: 0; } to { transform: none; opacity: 1; } }
-  @keyframes suspension { from { transform: translateY(0); } to { transform: translateY(-4px); } }
-  @keyframes girar      { to { transform: rotate(360deg); } }
-  @keyframes estela     { 0%,100% { opacity: .25; transform: translateX(0); } 50% { opacity: 1; transform: translateX(-14px); } }
-  @keyframes faro       { 0%,100% { opacity: .55; } 50% { opacity: 1; } }
-
-  /* ---- Corredor LAX ⇄ ZAZ ---- */
-  .ruta-camion { animation: recorrido 18s linear infinite; will-change: transform; }
-  @keyframes recorrido { from { transform: translateX(-18%); } to { transform: translateX(100%); } }
-
-  .asfalto-lineas {
-    background-image: repeating-linear-gradient(90deg, #FFCE00 0 26px, transparent 26px 60px);
-    animation: asfalto 1.4s linear infinite;
-  }
-  @keyframes asfalto { to { background-position-x: -60px; } }
-
-  .revelar { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
-  .revelar.visible { opacity: 1; transform: none; }
-
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    .camion, .rueda, .estelas, .faro, .asfalto-lineas { animation: none; }
-    .ruta-camion { animation: none; transform: translateX(42%); }
-    .revelar { opacity: 1; transform: none; transition: none; }
-    *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+    @keyframes entrada    { from { transform: translateX(-56px); opacity: 0; } to { transform: none; opacity: 1; } }
+    @keyframes suspension { from { transform: translateY(0); } to { transform: translateY(-4px); } }
+    @keyframes girar      { to { transform: rotate(360deg); } }
+    @keyframes estela     { 0%,100% { opacity: .25; transform: translateX(0); } 50% { opacity: 1; transform: translateX(-14px); } }
+    @keyframes faro       { 0%,100% { opacity: .55; } 50% { opacity: 1; } }
+    @keyframes recorrido  { from { transform: translateX(-18%); } to { transform: translateX(100%); } }
+    @keyframes asfalto    { to { background-position-x: -60px; } }
   }
 </style>
 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "TrackFlow",
-  "description": "Gestión de almacenes y entregas de última milla para e-commerce",
-  "url": "https://trackflow.com",
-  "foundingDate": "2009",
-  "address": [
+  "@graph": [
     {
-      "@type": "PostalAddress",
-      "addressCountry": "US",
-      "addressLocality": "Los Ángeles",
-      "addressRegion": "California"
+      "@type": "Organization",
+      "@id": "https://trackflow.com/#organizacion",
+      "name": "TrackFlow",
+      "legalName": "TrackFlow Logistics",
+      "description": "Gestión de almacenes y entregas de última milla para e-commerce",
+      "url": "https://trackflow.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://trackflow.com/favicon.svg",
+        "width": 512,
+        "height": 512
+      },
+      "image": "https://trackflow.com/og-image.svg",
+      "foundingDate": "2009",
+      "address": [
+        {
+          "@type": "PostalAddress",
+          "addressCountry": "US",
+          "addressLocality": "Los Ángeles",
+          "addressRegion": "California"
+        },
+        {
+          "@type": "PostalAddress",
+          "addressCountry": "ES",
+          "addressLocality": "Zaragoza",
+          "addressRegion": "Aragón"
+        }
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+1-213-555-0147",
+        "contactType": "sales",
+        "availableLanguage": ["Spanish", "English"]
+      },
+      "sameAs": ["https://linkedin.com/company/trackflow"],
+      "areaServed": [
+        { "@type": "Country", "name": "Estados Unidos" },
+        { "@type": "Country", "name": "Spain" }
+      ],
+      "knowsLanguage": ["es", "en"]
     },
     {
-      "@type": "PostalAddress",
-      "addressCountry": "ES",
-      "addressLocality": "Zaragoza",
-      "addressRegion": "Aragón"
-    }
-  ],
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "telephone": "+1-213-555-0147",
-    "contactType": "sales",
-    "availableLanguage": ["Spanish", "English"]
-  },
-  "sameAs": ["https://linkedin.com/company/trackflow"],
-  "areaServed": [
-    {
-      "@type": "Country",
-      "name": "Estados Unidos"
+      "@type": "WebSite",
+      "@id": "https://trackflow.com/#sitio",
+      "url": "https://trackflow.com/",
+      "name": "TrackFlow",
+      "inLanguage": "es",
+      "publisher": { "@id": "https://trackflow.com/#organizacion" }
     },
     {
-      "@type": "Country",
-      "name": "Spain"
+      "@type": "WebPage",
+      "@id": "https://trackflow.com/#inicio",
+      "url": "https://trackflow.com/",
+      "name": "TrackFlow — Logística e-commerce en Estados Unidos y España",
+      "description": "Gestión de almacenes, entregas de última milla y logística inversa en Estados Unidos y España.",
+      "inLanguage": "es",
+      "isPartOf": { "@id": "https://trackflow.com/#sitio" },
+      "about": { "@id": "https://trackflow.com/#organizacion" }
     }
   ]
 }
 </script>
 </head>
 
-<body class="bg-papel font-sans text-tinta antialiased">
+<body class="bg-papel font-sans text-tinta antialiased [&_:focus-visible]:outline-3 [&_:focus-visible]:outline-offset-[3px] [&_:focus-visible]:outline-senal">
 
 <a href="#contenido" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:left-4 focus:top-4 focus:bg-oro focus:px-4 focus:py-2 focus:font-mono focus:text-sm focus:text-tinta">Saltar al contenido</a>
 
@@ -170,9 +175,9 @@
 
       <div class="flex items-center border border-humo" role="group" aria-label="Idioma / Language">
         <button type="button" data-idioma="es" lang="es" aria-pressed="true"
-                class="btn-idioma px-3 py-2 font-mono text-xs uppercase tracking-[0.14em] transition-colors">ES</button>
+                class="btn-idioma px-3 py-2 font-mono text-xs uppercase tracking-[0.14em] text-gris transition-colors hover:text-tinta aria-pressed:bg-oro aria-pressed:text-tinta">ES</button>
         <button type="button" data-idioma="en" lang="en" aria-pressed="false"
-                class="btn-idioma px-3 py-2 font-mono text-xs uppercase tracking-[0.14em] transition-colors">EN</button>
+                class="btn-idioma px-3 py-2 font-mono text-xs uppercase tracking-[0.14em] text-gris transition-colors hover:text-tinta aria-pressed:bg-oro aria-pressed:text-tinta">EN</button>
       </div>
 
       <a href="application.html" class="hidden bg-oro px-5 py-2.5 font-mono text-xs uppercase tracking-[0.14em] text-tinta transition-colors hover:bg-tinta hover:text-papel md:inline-block">Solicitar información</a>
@@ -208,7 +213,7 @@
         <span>LAX <span aria-hidden="true">⇄</span><span class="sr-only">a</span> ZAZ · desde 2009</span>
       </p>
 
-      <h1 id="titular-hero" class="titular font-display text-[clamp(3rem,11vw,8rem)] font-black uppercase">
+      <h1 id="titular-hero" class="font-display text-[clamp(3rem,11vw,8rem)] font-black uppercase leading-[0.88] tracking-[-0.01em]">
         Logística que escala<br>
         <span class="text-senal">con tu e-commerce</span>
       </h1>
@@ -257,11 +262,11 @@
           </linearGradient>
         </defs>
 
-        <g class="estelas" stroke="url(#g-speed)" stroke-width="7" stroke-linecap="round">
+        <g class="animate-estela motion-reduce:animate-none" stroke="url(#g-speed)" stroke-width="7" stroke-linecap="round">
           <path d="M8 86 H72"/><path d="M0 124 H48"/><path d="M14 162 H60"/><path d="M2 198 H38"/>
         </g>
 
-        <g class="camion">
+        <g class="animate-camion motion-reduce:animate-none">
           <!-- Caja -->
           <rect x="84" y="46" width="356" height="134" rx="8" fill="url(#g-body)" stroke="#FFCE00" stroke-width="2.5"/>
           <g stroke="#FFFFFF" stroke-opacity="0.07" stroke-width="2">
@@ -286,7 +291,7 @@
           <path d="M462 148 H648 L656 168 H462 Z" fill="#DD0000"/>
           <rect x="470" y="36" width="96" height="9" rx="4" fill="#1C1C22" stroke="#FFCE00" stroke-opacity="0.5" stroke-width="1.5"/>
           <path d="M614 128 l22 6 v10 l-22 -6 z" fill="#2A2A32"/>
-          <circle class="faro" cx="640" cy="176" r="30" fill="url(#g-lamp)"/>
+          <circle class="origin-center animate-faro [transform-box:fill-box] motion-reduce:animate-none" cx="640" cy="176" r="30" fill="url(#g-lamp)"/>
           <rect x="634" y="170" width="30" height="11" rx="5" fill="#FFCE00"/>
 
           <!-- Faldón -->
@@ -295,7 +300,7 @@
           <!-- Ruedas -->
           <g transform="translate(170,212)">
             <circle r="34" fill="#101014" stroke="#2B2B33" stroke-width="7"/>
-            <g class="rueda">
+            <g class="origin-center animate-rueda [transform-box:fill-box] motion-reduce:animate-none">
               <circle r="16" fill="#1B1B21" stroke="#FFCE00" stroke-width="3"/>
               <g stroke="#FFCE00" stroke-width="3.5" stroke-linecap="round">
                 <path d="M0 -11 V-4"/><path d="M10.5 3.4 L4 1.2"/><path d="M-10.5 3.4 L-4 1.2"/><path d="M6.5 8.9 L2.5 3.4"/><path d="M-6.5 8.9 L-2.5 3.4"/>
@@ -304,7 +309,7 @@
           </g>
           <g transform="translate(352,212)">
             <circle r="34" fill="#101014" stroke="#2B2B33" stroke-width="7"/>
-            <g class="rueda">
+            <g class="origin-center animate-rueda [transform-box:fill-box] motion-reduce:animate-none">
               <circle r="16" fill="#1B1B21" stroke="#FFCE00" stroke-width="3"/>
               <g stroke="#FFCE00" stroke-width="3.5" stroke-linecap="round">
                 <path d="M0 -11 V-4"/><path d="M10.5 3.4 L4 1.2"/><path d="M-10.5 3.4 L-4 1.2"/><path d="M6.5 8.9 L2.5 3.4"/><path d="M-6.5 8.9 L-2.5 3.4"/>
@@ -313,7 +318,7 @@
           </g>
           <g transform="translate(586,212)">
             <circle r="34" fill="#101014" stroke="#2B2B33" stroke-width="7"/>
-            <g class="rueda">
+            <g class="origin-center animate-rueda [transform-box:fill-box] motion-reduce:animate-none">
               <circle r="16" fill="#1B1B21" stroke="#FFCE00" stroke-width="3"/>
               <g stroke="#FFCE00" stroke-width="3.5" stroke-linecap="round">
                 <path d="M0 -11 V-4"/><path d="M10.5 3.4 L4 1.2"/><path d="M-10.5 3.4 L-4 1.2"/><path d="M6.5 8.9 L2.5 3.4"/><path d="M-6.5 8.9 L-2.5 3.4"/>
@@ -340,14 +345,14 @@
       </div>
 
       <div class="relative mt-5 h-16 overflow-hidden" aria-hidden="true">
-        <div class="asfalto-lineas absolute inset-x-0 top-1/2 h-[3px] -translate-y-1/2 opacity-40"></div>
-        <div class="ruta-camion absolute bottom-1 w-24">
+        <div class="absolute inset-x-0 top-1/2 h-[3px] -translate-y-1/2 bg-[image:repeating-linear-gradient(90deg,#FFCE00_0_26px,transparent_26px_60px)] opacity-40 animate-asfalto motion-reduce:animate-none"></div>
+        <div class="absolute bottom-1 w-24 will-change-transform animate-ruta motion-reduce:animate-none motion-reduce:translate-x-[42%]">
           <svg viewBox="0 0 120 46" class="w-24">
             <rect x="2" y="8" width="62" height="26" rx="3" fill="#17171A" stroke="#FFCE00" stroke-width="2"/>
             <rect x="2" y="21" width="62" height="6" fill="#DD0000"/>
             <path d="M66 14h16l12 14h8v6H66z" fill="#17171A" stroke="#FFCE00" stroke-width="2"/>
-            <g transform="translate(22,38)"><g class="rueda"><circle r="6" fill="#0B0B0C" stroke="#F1F0EB" stroke-width="2"/><path d="M0 -4 V4" stroke="#FFCE00" stroke-width="1.5"/></g></g>
-            <g transform="translate(84,38)"><g class="rueda"><circle r="6" fill="#0B0B0C" stroke="#F1F0EB" stroke-width="2"/><path d="M0 -4 V4" stroke="#FFCE00" stroke-width="1.5"/></g></g>
+            <g transform="translate(22,38)"><g class="origin-center animate-rueda [transform-box:fill-box] motion-reduce:animate-none"><circle r="6" fill="#0B0B0C" stroke="#F1F0EB" stroke-width="2"/><path d="M0 -4 V4" stroke="#FFCE00" stroke-width="1.5"/></g></g>
+            <g transform="translate(84,38)"><g class="origin-center animate-rueda [transform-box:fill-box] motion-reduce:animate-none"><circle r="6" fill="#0B0B0C" stroke="#F1F0EB" stroke-width="2"/><path d="M0 -4 V4" stroke="#FFCE00" stroke-width="1.5"/></g></g>
           </svg>
         </div>
         <div class="absolute inset-x-0 bottom-0 h-[6px] bg-oro/70"></div>
@@ -360,13 +365,13 @@
     <div class="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-24">
 
       <div class="mb-12 flex flex-col gap-4 border-b-4 border-tinta pb-6 md:flex-row md:items-end md:justify-between">
-        <h2 id="titulo-servicios" class="titular font-display text-[clamp(2.5rem,6vw,4.5rem)] font-black uppercase">Servicios</h2>
+        <h2 id="titulo-servicios" class="font-display text-[clamp(2.5rem,6vw,4.5rem)] font-black uppercase leading-[0.88] tracking-[-0.01em]">Servicios</h2>
         <p class="font-mono text-xs uppercase tracking-[0.18em] text-tinta/60">Tres operaciones, un único interlocutor</p>
       </div>
 
       <div class="grid gap-6 md:grid-cols-3 md:gap-8">
 
-        <article class="revelar flex flex-col border-t-8 border-tinta bg-nieve p-7 shadow-[6px_6px_0_0_#14141A]">
+        <article class="revelar flex translate-y-[18px] flex-col border-t-8 border-tinta bg-nieve p-7 opacity-0 shadow-[6px_6px_0_0_#14141A] transition duration-600 ease-out [&.visible]:translate-y-0 [&.visible]:opacity-100 motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none">
           <h3 class="font-display text-4xl font-extrabold uppercase leading-none">Gestión de Almacenes</h3>
           <ul class="mt-6 space-y-4 text-tinta/80">
             <li class="flex gap-3"><span class="mt-2 h-2 w-4 shrink-0 bg-papel" aria-hidden="true"></span>Almacenamiento, picking y packing</li>
@@ -375,7 +380,7 @@
           </ul>
         </article>
 
-        <article class="revelar flex flex-col border-t-8 border-senal bg-nieve p-7 shadow-[6px_6px_0_0_#DD0000]">
+        <article class="revelar flex translate-y-[18px] flex-col border-t-8 border-senal bg-nieve p-7 opacity-0 shadow-[6px_6px_0_0_#DD0000] transition duration-600 ease-out [&.visible]:translate-y-0 [&.visible]:opacity-100 motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none">
           <h3 class="font-display text-4xl font-extrabold uppercase leading-none">Entregas de Última Milla</h3>
           <ul class="mt-6 space-y-4 text-tinta/80">
             <li class="flex gap-3"><span class="mt-2 h-2 w-4 shrink-0 bg-senal" aria-hidden="true"></span>Red de carriers certificados en ambos países</li>
@@ -384,7 +389,7 @@
           </ul>
         </article>
 
-        <article class="revelar flex flex-col border-t-8 border-oro bg-nieve p-7 shadow-[6px_6px_0_0_#FFCE00]">
+        <article class="revelar flex translate-y-[18px] flex-col border-t-8 border-oro bg-nieve p-7 opacity-0 shadow-[6px_6px_0_0_#FFCE00] transition duration-600 ease-out [&.visible]:translate-y-0 [&.visible]:opacity-100 motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none">
           <h3 class="font-display text-4xl font-extrabold uppercase leading-none">Logística Inversa</h3>
           <ul class="mt-6 space-y-4 text-tinta/80">
             <li class="flex gap-3"><span class="mt-2 h-2 w-4 shrink-0 bg-oro" aria-hidden="true"></span>Gestión completa de devoluciones</li>
@@ -402,13 +407,13 @@
     <div class="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-24">
 
       <div class="mb-12 flex flex-col gap-4 border-b-4 border-oro pb-6 md:flex-row md:items-end md:justify-between">
-        <h2 id="titulo-cobertura" class="titular font-display text-[clamp(2.5rem,6vw,4.5rem)] font-black uppercase">Cobertura</h2>
+        <h2 id="titulo-cobertura" class="font-display text-[clamp(2.5rem,6vw,4.5rem)] font-black uppercase leading-[0.88] tracking-[-0.01em]">Cobertura</h2>
         <p class="font-mono text-xs uppercase tracking-[0.18em] text-gris">Infraestructura propia en dos mercados</p>
       </div>
 
       <div class="grid gap-6 md:grid-cols-2 md:gap-8">
 
-        <article class="revelar border border-humo bg-papel p-7 md:p-9">
+        <article class="revelar translate-y-[18px] border border-humo bg-papel p-7 opacity-0 transition duration-600 ease-out [&.visible]:translate-y-0 [&.visible]:opacity-100 motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none md:p-9">
           <p class="font-mono text-xs uppercase tracking-[0.2em] text-senal">LAX</p>
           <h3 class="mt-2 font-display text-5xl font-black uppercase leading-none">Estados Unidos</h3>
           <dl class="mt-8 divide-y divide-humo">
@@ -440,7 +445,7 @@
           </dl>
         </article>
 
-        <article class="revelar border border-humo bg-papel p-7 md:p-9">
+        <article class="revelar translate-y-[18px] border border-humo bg-papel p-7 opacity-0 transition duration-600 ease-out [&.visible]:translate-y-0 [&.visible]:opacity-100 motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none md:p-9">
           <p class="font-mono text-xs uppercase tracking-[0.2em] text-senal">ZAZ</p>
           <h3 class="mt-2 font-display text-5xl font-black uppercase leading-none">España</h3>
           <dl class="mt-8 divide-y divide-humo">
@@ -483,24 +488,24 @@
     <div class="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-24">
 
       <div class="mb-12 flex flex-col gap-4 border-b-4 border-tinta pb-6 md:flex-row md:items-end md:justify-between">
-        <h2 id="titulo-porque" class="titular font-display text-[clamp(2.5rem,6vw,4.5rem)] font-black uppercase">Por qué TrackFlow</h2>
+        <h2 id="titulo-porque" class="font-display text-[clamp(2.5rem,6vw,4.5rem)] font-black uppercase leading-[0.88] tracking-[-0.01em]">Por qué TrackFlow</h2>
         <p class="font-mono text-xs uppercase tracking-[0.18em] text-tinta/70">Cuatro razones para externalizar con nosotros</p>
       </div>
 
       <div class="grid gap-px bg-tinta sm:grid-cols-2">
-        <article class="revelar bg-oro p-7 md:p-9">
+        <article class="revelar translate-y-[18px] bg-oro p-7 opacity-0 transition duration-600 ease-out [&.visible]:translate-y-0 [&.visible]:opacity-100 motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none md:p-9">
           <h3 class="font-display text-3xl font-extrabold uppercase leading-none">Operación binacional</h3>
           <p class="mt-4 text-tinta/80">El único operador con infraestructura propia en Estados Unidos y España.</p>
         </article>
-        <article class="revelar bg-oro p-7 md:p-9">
+        <article class="revelar translate-y-[18px] bg-oro p-7 opacity-0 transition duration-600 ease-out [&.visible]:translate-y-0 [&.visible]:opacity-100 motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none md:p-9">
           <h3 class="font-display text-3xl font-extrabold uppercase leading-none">+130 profesionales</h3>
           <p class="mt-4 text-tinta/80">Un equipo dedicado en exclusiva a tu logística, no un servicio compartido.</p>
         </article>
-        <article class="revelar bg-oro p-7 md:p-9">
+        <article class="revelar translate-y-[18px] bg-oro p-7 opacity-0 transition duration-600 ease-out [&.visible]:translate-y-0 [&.visible]:opacity-100 motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none md:p-9">
           <h3 class="font-display text-3xl font-extrabold uppercase leading-none">Tecnología propia</h3>
           <p class="mt-4 text-tinta/80">Visibilidad total de tu inventario, en todos los almacenes y en tiempo real.</p>
         </article>
-        <article class="revelar bg-oro p-7 md:p-9">
+        <article class="revelar translate-y-[18px] bg-oro p-7 opacity-0 transition duration-600 ease-out [&.visible]:translate-y-0 [&.visible]:opacity-100 motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none md:p-9">
           <h3 class="font-display text-3xl font-extrabold uppercase leading-none">Especialización e-commerce</h3>
           <p class="mt-4 text-tinta/80">Moda, electrónica y cosmética: sabemos cómo se mueve cada categoría.</p>
         </article>
@@ -513,7 +518,7 @@
     <div class="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-24">
 
       <div class="mb-12 flex flex-col gap-4 border-b-4 border-senal pb-6 md:flex-row md:items-end md:justify-between">
-        <h2 id="titulo-contacto" class="titular font-display text-[clamp(2.5rem,6vw,4.5rem)] font-black uppercase">Contacto</h2>
+        <h2 id="titulo-contacto" class="font-display text-[clamp(2.5rem,6vw,4.5rem)] font-black uppercase leading-[0.88] tracking-[-0.01em]">Contacto</h2>
         <p class="font-mono text-xs uppercase tracking-[0.18em] text-gris">Respondemos en menos de 24 horas laborables</p>
       </div>
 

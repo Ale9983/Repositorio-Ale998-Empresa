@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="TrackFlow — logística para e-commerce entre Los Ángeles y Zaragoza">
+  <title>TrackFlow — logística para e-commerce entre Los Ángeles y Zaragoza</title>
+  <rect width="1200" height="630" fill="#14141A"/>
+  <rect x="0" y="0" width="1200" height="16" fill="#DD0000"/>
+  <rect x="0" y="614" width="1200" height="16" fill="#FFCE00"/>
+
+  <g transform="translate(80 110)">
+    <rect width="72" height="72" fill="#FFCE00"/>
+    <g transform="translate(16 22) scale(1.0)">
+      <rect x="1" y="4" width="21" height="14" rx="2" fill="#0B0B0C"/>
+      <path d="M24 8h6l5 6h3v4H24z" fill="#0B0B0C"/>
+      <circle cx="9" cy="21" r="4" fill="#0B0B0C"/>
+      <circle cx="30" cy="21" r="4" fill="#0B0B0C"/>
+    </g>
+  </g>
+
+  <text x="176" y="162" font-family="Arial Narrow, Impact, sans-serif" font-size="58" font-weight="900" fill="#FFFFFF" letter-spacing="2">TRACKFLOW</text>
+
+  <text x="80" y="300" font-family="Arial Narrow, Impact, sans-serif" font-size="92" font-weight="900" fill="#FFFFFF">Logística que escala</text>
+  <text x="80" y="390" font-family="Arial Narrow, Impact, sans-serif" font-size="92" font-weight="900" fill="#FFCE00">con tu e-commerce</text>
+
+  <text x="80" y="470" font-family="Courier New, monospace" font-size="30" fill="#DDDBD3">Los Ángeles  ⇄  Zaragoza</text>
+  <text x="80" y="520" font-family="Arial, sans-serif" font-size="26" fill="#9B9BA2">Almacenes · Última milla · Logística inversa</text>
+</svg>
