@@ -19,6 +19,20 @@ This repository is the **starter template** for transversal projects. You will w
 
 ---
 
+## Run the TrackFlow website locally
+
+The site is static (HTML + Tailwind via CDN), so any local server works. Requires Node.js 18+ (already installed in GitHub Codespaces).
+
+```bash
+npx --yes http-server . -p 8080 -c-1
+```
+
+- **Local:** open http://localhost:8080 (home) and http://localhost:8080/application.html (application form).
+- **GitHub Codespaces:** the port is forwarded automatically. Click **Open in Browser** in the notification, or open port `8080` from the **Ports** tab.
+- `-c-1` disables caching so you always see your latest changes. Stop the server with `Ctrl + C`.
+
+---
+
 ## How to start
 
 1. **Use this repository as a template** and create your own project repo.
