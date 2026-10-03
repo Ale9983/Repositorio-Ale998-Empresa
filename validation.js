@@ -1,6 +1,3 @@
-/* =======================================================================
-   1. IDIOMA (español por defecto / inglés)
-   ======================================================================= */
 const DICC = {
   "Saltar al contenido": "Skip to content",
   "Icono de camión de TrackFlow": "TrackFlow truck icon",

@@ -30,6 +30,31 @@ Este repositorio es la **plantilla de inicio** para los proyectos transversales.
 
 ---
 
+## Ejecutar el sitio web de TrackFlow
+
+El sitio es estático (HTML + Tailwind por CDN), así que basta con un servidor local. Desde la carpeta donde están `index.html` y `application.html`, ejecuta:
+
+```bash
+cd uis/website
+npx --yes http-server . -p 5500 -a 0.0.0.0
+```
+
+- `--yes` instala `http-server` sin pedir confirmación.
+- `.` sirve la carpeta actual.
+- `-p 5500` usa el puerto 5500.
+- `-a 0.0.0.0` acepta conexiones externas (necesario en Codespaces).
+
+Luego abre `http://localhost:5500` en el navegador. Para detener el servidor, pulsa `Ctrl + C` en la terminal.
+
+### En GitHub Codespaces
+
+1. Ejecuta el comando anterior en la terminal del Codespace.
+2. Abre la pestaña **Ports** (junto a la terminal).
+3. Busca el puerto `5500`, haz clic derecho y elige **Port Visibility → Public**.
+4. Abre la URL que aparece en la columna **Forwarded Address**.
+
+---
+
 ## Cómo entender este monorepo
 
 Estás construyendo **una sola empresa** a lo largo de muchos hitos y proyectos. Cada carpeta de primer nivel tiene **una responsabilidad clara** — como en un repositorio real de un equipo de ingeniería.
